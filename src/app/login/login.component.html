@@ -1,0 +1,69 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title>Market<em>Alfa</em></mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab label="Inicie Sesion" *ngIf="true">
+        <mat-card-content>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Usuario"
+                name="username"
+                type="text"
+                formControlName="username"
+                required
+              />
+              <!-- <mat-error *ngIf="username.invalid"
+                >Usuario es Requerido</mat-error
+              > -->
+              <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Contraseña"
+                name="password"
+                required
+              />
+              <!-- <mat-error *ngIf="password.errors && password.errors.required">
+                Password is required
+              </mat-error> -->
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!loginForm.valid"
+              class="login-button"
+            >
+              Iniciar
+              <mat-icon matSuffix>subdirectory_arrow_right</mat-icon>
+            </button>
+
+            <button
+              mat-button
+              type="button"
+              color="accent"
+              class="login-button button-forget"
+              (click)="getViewRecovery()"
+            >
+              ¿Olvidaste Tu Contraseña?
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+
+      <mat-tab label="Registrase Su Emprendimiento" *ngIf="false">
+        <app-register></app-register>
+      </mat-tab>
+      <mat-tab label="Recuperar Contraseña" *ngIf="this.viewRecovery | async">
+        <app-recovery></app-recovery>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

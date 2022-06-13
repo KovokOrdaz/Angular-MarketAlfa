@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container
+{
+    min-height: 85vh;
+    max-height: 100vh;
+    width: 100%;
+}
+
+.module
+{
+    margin: 40px;
+}
+
+.title
+{
+    font-size: 48px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.search
+{
+    width: 100%;
+    margin: 12px auto;
+}
+
+.data
+{
+    float: left; 
+    width: 70%;
+}
+
+.selected-column
+{
+    margin-top: 14px;
+    float: right; 
+    width: 25%;
+}
+
+.buttonSC
+{
+    width: 100%;
+}
+
+.EXCEL
+{
+    color: white;
+    background: #1D6F42;
+}
+
+.PDF
+{
+    color: white;
+    background: #f40f02;
+}
+
+.overlay
+{
+    min-height: 90vh;
+    width: 100%;
+    position: fixed;
+    background-color: #71717171;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

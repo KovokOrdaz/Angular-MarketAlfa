@@ -1,0 +1,107 @@
+<ng-container *ngIf="true">
+  <mat-toolbar class="navbar" color="primary">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="drawer.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>MarketAlfa</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon matBadge="8" matBadgePosition="before" matBadgeColor="warn">{{
+        true ? "notifications" : "notifications_active"
+      }}</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Estrelle es una rata con pelo XD</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="belowMenu">
+      <mat-icon> person_pin</mat-icon>
+      <span> Mario Ordaz</span>
+    </button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <button mat-menu-item>
+        <mat-icon>store</mat-icon>
+        Mi Negocio
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        Ajustes
+      </button>
+      <button class="exit" mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        Salir
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</ng-container>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side">
+    <ng-container *ngIf="true">
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="['/home']">
+          <mat-icon>home</mat-icon>
+          Inicio
+        </a>
+        <a mat-list-item [routerLink]="['/product']">
+          <mat-icon> category</mat-icon>
+          Productos
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon> import_export</mat-icon>
+          Transaciones
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon>playlist_add_check</mat-icon>
+          Inventario
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon>shopping_cart</mat-icon>
+          Venta
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon>group</mat-icon>
+          Clientes
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon>euro_symbol</mat-icon>
+          Divisas
+        </a>
+        <a mat-list-item [routerLink]="['/client']">
+          <mat-icon> local_shipping</mat-icon>
+          Proveedores
+        </a>
+        <a mat-list-item [routerLink]="['/academic']">
+          <mat-icon>work_outline</mat-icon>
+          Empleados
+        </a>
+        <a mat-list-item [routerLink]="['/order']">
+          <mat-icon>playlist_add</mat-icon>
+          Ordenes
+        </a>
+      </mat-nav-list>
+    </ng-container>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

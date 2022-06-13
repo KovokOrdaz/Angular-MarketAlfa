@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="module">
+    <p class="title">{{ title }}</p>
+    <div class="data">
+      <div class="info">
+        <mat-form-field class="search" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar..."
+            (keyup)="updateFilter($event)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Buscador a Tiempo Real de {{ title }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <mat-card class="example-card">
+        <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+        <mat-card-title>{{
+          !selected.length ? "Opciones" : selected.name
+        }}</mat-card-title>
+
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <mat-list *ngIf="!selected.length">
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openCreate()"
+              >
+                <mat-icon matPrefix>add_circle_outline</mat-icon>
+                Agregar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button class="buttonSC" color="warn">
+                <mat-icon matPrefix>filter_list</mat-icon>
+                Inactivos
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button class="buttonSC" color="basic">
+                <mat-icon> pie_chart</mat-icon>
+                Grafica
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button class="buttonSC PDF">
+                <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                PDF
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button class="buttonSC EXCEL">
+                <mat-icon>vertical_split</mat-icon>
+                EXCEL
+              </button>
+            </mat-list-item>
+          </mat-list>
+          <mat-list *ngFor="let sel of selected">
+            <mat-list-item>Nacionalidad: {{ sel.nationality }}</mat-list-item>
+            <mat-list-item>Cedula o Pasaporte: {{ sel.dni }}</mat-list-item>
+            <mat-list-item>Ocupacion: {{ sel.job }}</mat-list-item>
+            <mat-list-item>Entrada: {{ sel.input }}</mat-list-item>
+            <mat-list-item>Salida: {{ sel.output }}</mat-list-item>
+            <mat-list-item
+              >Fecha de Nacimiento: {{ sel.dateOfBirth }}</mat-list-item
+            >
+            <mat-list-item
+              >Numero de Seguridad Social:
+              {{ sel.socialSecurity }}</mat-list-item
+            >
+            <mat-list-item>Numero de Telefono: {{ sel.phone }}</mat-list-item>
+            <mat-list-item>Salario: {{ sel.salary }}</mat-list-item>
+            <mat-list-item>Modalidad de Pago: {{ sel.datePay }}</mat-list-item>
+            <mat-list-item>Es Usuario: {{ sel.isUser }}</mat-list-item>
+            <mat-list-item>Fecha de Registro: {{ sel.date }}</mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button color="basic">
+                <mat-icon>edit</mat-icon>Edtiar
+              </button>
+              <button mat-raised-button color="warn">
+                <mat-icon>close</mat-icon>Inactivar
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

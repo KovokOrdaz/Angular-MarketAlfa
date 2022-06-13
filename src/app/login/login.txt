@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+        <p>
+          <mat-form-field>
+            <input
+              type="text"
+              formControlName="username"
+              matInput
+              placeholder="Usuario"
+            />
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input
+              type="password"
+              formControlName="password"
+              matInput
+              placeholder="Contraseña"
+            />
+            <mat-icon matSuffix>key</mat-icon>
+          </mat-form-field>
+        </p>
+        <div>
+          <button type="submit" [disabled]="!loginForm.valid" mat-raised-button>
+            Iniciar
+          </button>
+        </div>
+      </form>

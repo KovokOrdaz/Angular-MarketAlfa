@@ -1,0 +1,61 @@
+<div>
+  <button mat-raised-button color="primary" (click)="openCreate()">
+    Agregar
+  </button>
+</div>
+<div>
+  <div>
+    <h3>Empleados</h3>
+    <div style="float: left; width: 75%">
+      <div class="info">
+        <p>Empleados Activos a Tiempo Real</p>
+      </div>
+      <input
+        type="text"
+        style="padding: 8px; margin: 15px auto; width: 100%"
+        placeholder="Buscar..."
+        (keyup)="updateFilter($event)"
+      />
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <h4>Opciones</h4>
+      <ul *ngFor="let sel of selected">
+        <li>Empleado: {{ sel.name }}</li>
+        <li>Nacionalidad: {{ sel.nationality }}</li>
+        <li>Cedula o Pasaporte: {{ sel.dni }}</li>
+        <li>Ocupacion: {{ sel.job }}</li>
+        <li>Entrada: {{ sel.input }}</li>
+        <li>Salida: {{ sel.output }}</li>
+        <li>Fecha de Nacimiento: {{ sel.dateOfBirth }}</li>
+        <li>Numero de Seguridad Social: {{ sel.socialSecurity }}</li>
+        <li>Numero de Telefono: {{ sel.phone }}</li>
+        <li>Salario: {{ sel.salary }}</li>
+        <li>Modalidad de Pago: {{ sel.datePay }}</li>
+        <li>Es Usuario: {{ sel.isUser }}</li>
+        <li>Fecha de Registro: {{ sel.date }}</li>
+        <li>
+          <button mat-raised-button color="basic">Edtiar</button>
+          <button mat-raised-button color="warn">Eliminar</button>
+        </li>
+      </ul>
+      <ul *ngIf="!selected.length">
+        <li><button mat-raised-button color="warn">Inactivos</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
