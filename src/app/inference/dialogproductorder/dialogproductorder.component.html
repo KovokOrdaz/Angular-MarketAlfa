@@ -1,0 +1,148 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Registre Pedido de {{ name }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Fecha de Entrega (Aproximado)</mat-label>
+      <input
+        title="receive"
+        [(ngModel)]="receive"
+        matInput
+        numbersOnly
+        [matDatepicker]="picker"
+        required
+        (blur)="dateValidation()"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cantidad</mat-label>
+      <input
+        type="number"
+        [(ngModel)]="amount"
+        matInput
+        min="0"
+        placeholder="cantidad"
+        onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+        required
+      />
+      <span matSuffix
+        ><strong>{{ this.measureDec }}</strong></span
+      >
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <h3 style="text-align: center; padding: 20px; width: 100%">
+      Elige un Distribuidor
+    </h3>
+    <mat-tab-group mat-align-tabs="center" style="width: 100%">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">local_shipping</mat-icon>
+          Distribuidor Para el Producto: ({{ name }})
+        </ng-template>
+        <ng-container
+          *ngIf="
+            listDistSpeedProduct.length > 0 || listDistRespetProduct.length > 0;
+            else noSpeed
+          "
+        >
+          <ng-container *ngFor="let element of listDistSpeedProduct">
+            <button
+              mat-menu-item
+              (click)="addOrder(element.id)"
+              style="display: block; font-size: 16; font-weight: 700"
+            >
+              <mat-icon>category</mat-icon>
+              <span>
+                {{ element.name }} - Rapidez del {{ element.speedCount * 100 }}%
+              </span>
+            </button>
+          </ng-container>
+          <ng-container *ngFor="let element of listDistRespetProduct">
+            <button
+              mat-menu-item
+              (click)="addOrder(element.id)"
+              style="display: block; font-size: 16; font-weight: 700"
+            >
+              <mat-icon>category</mat-icon>
+              <span>
+                {{ element.name }} - Responsabilidad ({{
+                  element.speedCount * 100
+                }}%)
+              </span>
+            </button>
+          </ng-container>
+        </ng-container>
+        <ng-template #noSpeed>
+          <button
+            mat-menu-item
+            style="display: block; font-size: 16; font-weight: 700"
+          >
+            <mat-icon>category</mat-icon>
+            <span>
+              {{ name }}: Aun No Tiene Suficiente Informacion para Recomendar un
+              Proveedor, Se Recomiendo probar con un Provedor General
+            </span>
+          </button>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">local_shipping</mat-icon>
+          Habituales
+        </ng-template>
+        <ng-container *ngFor="let element of listDistCommon">
+          <button
+            mat-menu-item
+            (click)="addOrder(element.rif)"
+            style="display: block; font-size: 16; font-weight: 700"
+          >
+            <mat-icon>category</mat-icon>
+            <span>
+              {{ element.name }} - Transaciones: ({{ element.countD }})
+            </span>
+          </button>
+        </ng-container>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">local_shipping</mat-icon>
+          Rapidez (General)
+        </ng-template>
+        <ng-container *ngFor="let element of listDistSpeed">
+          <button
+            mat-menu-item
+            (click)="addOrder(element.id)"
+            style="display: block; font-size: 16; font-weight: 700"
+          >
+            <mat-icon>category</mat-icon>
+            <span> {{ element.name }} ({{ element.speedCount * 100 }}%) </span>
+          </button>
+        </ng-container>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">local_shipping</mat-icon>
+          Resposabilidad (General)
+        </ng-template>
+        <ng-container *ngFor="let element of listDistRespet">
+          <button
+            mat-menu-item
+            (click)="addOrder(element.id)"
+            style="display: block; font-size: 16; font-weight: 700"
+          >
+            <mat-icon>category</mat-icon>
+            <span> {{ element.name }} ({{ element.respetCount * 100 }}%) </span>
+          </button>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</div>

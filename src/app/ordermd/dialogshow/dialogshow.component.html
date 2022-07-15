@@ -1,0 +1,32 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Pedido</h1>
+  <div mat-dialog-content id="tableShowPDF">
+    <h2>Orden #{{ code }}</h2>
+    <h3>Distribuidor: {{ distributor }}</h3>
+    <h3>Fecha de Entrega: {{ receive }}</h3>
+    <table matSort>
+      <tr>
+        <th mat-sort-header="name">Producto</th>
+        <th mat-sort-header="fat">Cantidad</th>
+        <th mat-sort-header="calories">Medida</th>
+      </tr>
+      <ng-container *ngIf="data.length > 0">
+        <tr *ngFor="let element of data">
+          <td>{{ element.product }}</td>
+          <td>{{ element.amount }}</td>
+          <td>{{ element.measure }}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cerrar
+    </button>
+    <button mat-raised-button class="PDF" (click)="createPDF()">
+      <mat-icon matPrefix>picture_as_pdf</mat-icon>
+      PDF
+    </button>
+  </div>
+</div>

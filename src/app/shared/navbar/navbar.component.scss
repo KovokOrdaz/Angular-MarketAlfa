@@ -18,3 +18,8 @@ mat-nav-list a{
     font-size: 18px;
     font-weight: 500;
 }
+
+::ng-deep .mat-menu-panel
+{
+  max-width: none !important;
+}

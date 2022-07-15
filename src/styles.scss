@@ -24,6 +24,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 48px;
     text-align: center;
     font-weight: 700;
+    color: #3f51b5;
 }
 
 .search
@@ -64,12 +65,87 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .overlay
 {
-    min-height: 90vh;
+    min-height: 100%;
     width: 100%;
     position: fixed;
-    background-color: #71717171;
-    z-index: 10;
+    background-color: #17171717;
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.dialog
+{
+    min-width: 460px;
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 6px;
+}
+
+.dialog h1, h3
+{
+    text-align: center;
+}
+
+.dialog h1
+{
+    color: #3f51b5;
+    font-size: 36px;
+    padding: 0px 20px;
+}
+
+.dialog h3
+{
+    font-size: 24px;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.detailtable
+{
+    width: 100%;
+    text-align: center;
+}
+
+.detailtable th
+{
+    font-size: 12px;
+}
+
+.dialog mat-form-field
+{
+    display: block;
+    width: 80%;
+    margin: auto;
+    padding: 12px;
+}
+
+.dialog mat-checkbox
+{
+    display: block;
+    margin: auto;
+    width: 80%;
+    font-size: 18px;
+}
+
+.dialog .subtitle
+{
+    padding: 20px;
+}
+
+.dialog mat-form-field input
+{
+    display: block;
+    width: 100%;
+    font-size: 18px;
+}
+
+.dialog button
+{
+    width: 45%;
+    margin: auto;
+    padding: 6px;
 }

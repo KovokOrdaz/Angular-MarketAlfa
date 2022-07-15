@@ -20,6 +20,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies":
+            [
+              "clone-deep"
+            ],
             "outputPath": "dist/market-alfa",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,9 +36,13 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/html2canvas/dist/html2canvas.min.js",
+              "node_modules/jspdf/dist/jspdf.min.js"
+            ]
           },
           "configurations": {
             "production": {

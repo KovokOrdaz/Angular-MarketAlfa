@@ -1,0 +1,21 @@
+<div class="dialog">
+  <h1 mat-dialog-title class="del">Activar</h1>
+  <div mat-dialog-content>
+    <h3 class="del">¿Esta Seguro que desea Activar?</h3>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      cdkFocosInitial
+      [mat-dialog-close]="false"
+    >
+      <mat-icon>delete</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true">
+      <mat-icon>check_circle_outline</mat-icon>
+      Activar
+    </button>
+  </div>
+</div>

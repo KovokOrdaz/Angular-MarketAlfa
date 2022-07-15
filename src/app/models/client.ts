@@ -1,9 +1,9 @@
-export interface Client
-{
-    id: number;
-    name: string;
-    nationality: string;
-    dni: string;
-    phone: string;
-    status: number;
+export interface Client {
+  name: string;
+  nationality: number;
+  dni: string;
+  userRegister: number;
+  status: boolean;
+  direction: string;
+  phone: string;
 }

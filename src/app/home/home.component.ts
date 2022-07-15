@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
   {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
   }
 
   @ViewChild('myTable') table: any;

@@ -1,0 +1,54 @@
+<div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar Proveedor" : "Registrar Proveedor" }}
+  </h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Registro Único de Información Fiscal</mat-label>
+      <input
+        title="rif"
+        type="text"
+        matInput
+        [(ngModel)]="rif"
+        minlength="10"
+        required
+        (blur)="rifValidation()"
+        readonly="{{ statusRif }}"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input
+        title="name"
+        type="text"
+        matInput
+        [(ngModel)]="name"
+        minlength="6"
+        required
+        (blur)="nameValidation()"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Estructura Legal</mat-label>
+      <mat-select matInput [(ngModel)]="ls" required>
+        <mat-option *ngFor="let element of listLS" [value]="element.id">
+          {{ element.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
+</div>

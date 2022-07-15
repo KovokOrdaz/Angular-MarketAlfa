@@ -1,23 +1,64 @@
-<h1 mat-dialog-title>
-  {{ entity != null ? "Modificar " : "Registrar " }}
-</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Codigo</mat-label>
-    <input title="code" type="number" matInput [(ngModel)]="code" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Nombre</mat-label>
-    <input title="name" type="number" matInput [(ngModel)]="name" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button color="warn" (click)="close()">Cancelar</button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="entity != null ? update() : create()"
-  >
-    Registrar
-  </button>
+<div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar " : "Registrar " }}
+  </h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Código</mat-label>
+      <input
+        title="code"
+        type="text"
+        matInput
+        numbersOnly
+        [(ngModel)]="code"
+        (blur)="codeValidation()"
+        minlength="6"
+        readonly="{{ statusCode }}"
+        required
+      />
+      <mat-hint>El Código debe tener al menos 6 caracteres</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input
+        title="name"
+        type="text"
+        matInput
+        [(ngModel)]="name"
+        (blur)="nameValidation()"
+        minlength="3"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Medida</mat-label>
+      <mat-select matInput [(ngModel)]="description" required>
+        <mat-option *ngFor="let element of listMeasure" [value]="element.id">
+          {{ element.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Categoría</mat-label>
+      <mat-select matInput [(ngModel)]="category" required>
+        <mat-option *ngFor="let element of listCategory" [value]="element.id">
+          {{ element.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
 </div>

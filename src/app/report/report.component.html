@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="module">
+    <p class="title" style="font-size: 36px">{{ title }}</p>
+    <mat-tab-group mat-align-tabs="center" dynamicHeight style="margin: 20px">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+          Ventas
+        </ng-template>
+        <app-reportbuy></app-reportbuy>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon> category</mat-icon>
+          Productos
+        </ng-template>
+        <app-reportproduct></app-reportproduct>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon> group_work</mat-icon>
+          Categorías
+        </ng-template>
+        <app-reportcategory></app-reportcategory>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>reorder</mat-icon>
+          Medidas
+        </ng-template>
+        <app-reportmeasure></app-reportmeasure>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon> playlist_add_check</mat-icon>
+          Inventario
+        </ng-template>
+        <app-reportinventary></app-reportinventary>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

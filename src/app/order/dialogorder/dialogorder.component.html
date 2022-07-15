@@ -1,0 +1,88 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Registre Pedido</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Proveedor</mat-label>
+      <input
+        type="text"
+        matInput
+        [matAutocomplete]="auto"
+        [(ngModel)]="order.distributor"
+        placeholder="Proveedor"
+        required
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let element of listDist" [value]="element.rif">
+          {{ element.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Entrega (Aproximado)</mat-label>
+      <input
+        title="receive"
+        [(ngModel)]="order.receive"
+        matInput
+        [matDatepicker]="picker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <form [formGroup]="formConcept" (ngSubmit)="addContent()">
+      <mat-form-field>
+        <mat-label>Producto</mat-label>
+        <input
+          type="text"
+          formControlName="product"
+          matInput
+          placeholder="producto"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input
+          type="text"
+          formControlName="amount"
+          matInput
+          placeholder="cantidad"
+        />
+      </mat-form-field>
+      <div style="width: 100%">
+        <button
+          type="submit"
+          style="width: 100%; display: block"
+          [disabled]="!formConcept.valid"
+          mat-raised-button
+        >
+          +
+        </button>
+      </div>
+    </form>
+    <div>
+      <h5>Detalles</h5>
+      <table style="width: 100%">
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+        </tr>
+        <tr *ngFor="let item of concept">
+          <td>{{ item.product }}</td>
+          <td>{{ item.amount }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="addOrder()">
+      <mat-icon>edit</mat-icon>
+      Registrar
+    </button>
+  </div>
+</div>

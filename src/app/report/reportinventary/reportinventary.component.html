@@ -1,0 +1,25 @@
+<mat-tab-group mat-align-tabs="center" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+      Inventario de Producto
+    </ng-template>
+    <div>
+      <app-productinventary></app-productinventary>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      inventario de Categorías
+    </ng-template>
+    <app-categoryinventary></app-categoryinventary>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Inventario de Medidas
+    </ng-template>
+    <app-measureinventary></app-measureinventary>
+  </mat-tab>
+</mat-tab-group>

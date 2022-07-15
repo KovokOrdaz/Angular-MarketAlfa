@@ -1,5 +1,5 @@
 export interface ConceptOrder
 {
-    product: number;
+    product: string;
     amount: number;
 }

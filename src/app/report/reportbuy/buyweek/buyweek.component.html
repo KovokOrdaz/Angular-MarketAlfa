@@ -1,0 +1,60 @@
+<mat-card style="width: 100">
+  <mat-card-title style="text-align: center">
+    Ventas de los Últimos 7 Días Hábiles
+  </mat-card-title>
+  <mat-card-content id="cardPDF">
+    <mat-card-subtitle>Ventas de los Ultimos 7 Dias Habiles</mat-card-subtitle>
+    <button mat-button color="primary" style="font-weight: 700">
+      Transacciones: {{ count }} °
+    </button>
+    <button mat-button color="primary" style="font-weight: 700">
+      Ventas Promedio: {{ (averagePrice / 7).toFixed(2) }} {{ coin }}
+    </button>
+    <button mat-button color="primary" style="font-weight: 700">
+      Ganancia Promedio: {{ (averageProfit / 7).toFixed(2) }} {{ coin }}
+    </button>
+    <button mat-button color="primary" style="font-weight: 700">
+      Productos Vendidos: {{ totalAmount }}
+    </button>
+    <button mat-button color="primary" style="font-weight: 700">
+      Ganancia Brutal: {{ totalPrice.toFixed(2) }} {{ coin }}
+    </button>
+    <button mat-button color="primary" style="font-weight: 700">
+      Ganancia Neta: {{ totalProfit.toFixed(2) }} {{ coin }}
+    </button>
+    <ngx-charts-line-chart
+      [view]="view"
+      scheme="vivid"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="multi"
+      (select)="onSelectChart($event)"
+      (activate)="onActivateChart($event)"
+      (deactivate)="onDeactivateChart($event)"
+    >
+    </ngx-charts-line-chart>
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br />
+    <mat-card-subtitle style="margin: 20px">
+      MarketAlfaInfo: para esta gráficas solo son tomado en cuenta los Últimos 7
+      Días Hábiles
+    </mat-card-subtitle>
+  </mat-card-content>
+  <mat-divider inset> </mat-divider>
+  <mat-card-actions>
+    <button mat-raised-button class="buttonSC PDF" (click)="createPDF()">
+      <mat-icon matPrefix>picture_as_pdf</mat-icon>
+      PDF
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

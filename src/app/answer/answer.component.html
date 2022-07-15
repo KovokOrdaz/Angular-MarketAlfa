@@ -1,0 +1,45 @@
+<form (ngSubmit)="save()">
+  <div class="dialog">
+    <h1 mat-dialog-title>Cambiar Pregunta de Seguridad</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Pregunta de Seguridad</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Pregunta de Seguridad"
+          name="question"
+          [(ngModel)]="question"
+          minlength="10"
+          required
+        />
+        <mat-error>
+          La pregunta de Seguridad debe tener al menos 10 caracteres
+        </mat-error>
+        <mat-hint>
+          La pregunta de Seguridad debe tener al menos 10 caracteres
+        </mat-hint>
+        <mat-icon matSuffix>security</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Respuesta"
+          name="answer"
+          [(ngModel)]="answer"
+          minlength="3"
+          required
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error> Repuesta</mat-error>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>edit</mat-icon>
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

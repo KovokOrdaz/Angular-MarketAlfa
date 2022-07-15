@@ -1,0 +1,54 @@
+<div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar " : "Registrar " }}
+  </h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input
+        title="name"
+        type="text"
+        placeholder="Nombre"
+        matInput
+        [(ngModel)]="name"
+        minlength="4"
+        StringsOnly
+        required
+        style="text-transform: capitalize"
+        (blur)="nameValidation()"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Acronimo</mat-label>
+      <input
+        title="acronym"
+        placeholder="Acronimo"
+        type="text"
+        matInput
+        [(ngModel)]="acronym"
+        minlength="1"
+        StringsOnly
+        required
+        style="text-transform: capitalize"
+        (blur)="acroValidation()"
+      />
+    </mat-form-field>
+    <mat-checkbox class="example-margin" [(ngModel)]="complete"
+      >Es una unidad completa</mat-checkbox
+    >
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
+</div>

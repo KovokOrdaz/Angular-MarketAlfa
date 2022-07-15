@@ -19,6 +19,11 @@ export class ApiClientService {
   {
     return this._http.get<Result>(this.url);
   }
+  
+  readDni() : Observable<Result>
+  {
+    return this._http.get<Result>('https://localhost:7241/client/dni');
+  }
 
   create(entity: Client) : Observable<Result>
   {
@@ -30,7 +35,7 @@ export class ApiClientService {
     return this._http.put<Result>(this.url, entity, httpOption);
   }
   
-  delete(id: number) : Observable<Result>
+  delete(id: string) : Observable<Result>
   {
     return this._http.delete<Result>(`${this.url}/${id}`);
   }

@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="module">
+    <p class="title">{{ title }}</p>
+    <div class="data">
+      <div class="info">
+        <mat-form-field class="search" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar..."
+            (keyup)="updateFilter($event)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Buscador a Tiempo Real de {{ title }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+        id="tablePDF"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <mat-card class="example-card">
+        <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+        <mat-card-title> Opciones </mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <mat-list *ngIf="!selected.length">
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC"
+                [routerLink]="['/product']"
+                color="warn"
+              >
+                <mat-icon>arrow_back</mat-icon>
+                Regresar
+              </button>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openCreate()"
+              >
+                <mat-icon matPrefix>add_circle_outline</mat-icon>
+                Agregar
+              </button>
+            </mat-list-item>
+            <!-- <mat-list-item>
+                <button mat-raised-button class="buttonSC" color="basic">
+                  <mat-icon> pie_chart</mat-icon>
+                  Grafica
+                </button>
+              </mat-list-item> -->
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC PDF"
+                (click)="createPDF()"
+              >
+                <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                PDF
+              </button>
+            </mat-list-item>
+            <!-- <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC EXCEL"
+                (click)="createExcel()"
+              >
+                <mat-icon>vertical_split</mat-icon>
+                EXCEL
+              </button>
+            </mat-list-item> -->
+          </mat-list>
+          <mat-list *ngFor="let sel of selected">
+            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
+            <mat-list-item
+              >Estado:
+              <mat-icon color="primary">
+                {{ sel.status ? "check_circle_outline" : "close" }}
+              </mat-icon>
+              {{ sel.status ? "Activo" : "Inactivo" }}
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+                <mat-icon>edit</mat-icon>
+                Edtiar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button (click)="delete(sel)">
+                <mat-icon>{{ sel.status ? "close" : "check" }}</mat-icon>
+                {{ sel.status ? "Desactivar" : "Activar" }}
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                (click)="clearSelection()"
+              >
+                <mat-icon> clear_all</mat-icon>
+                Deseleccionar
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

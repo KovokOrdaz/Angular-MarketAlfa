@@ -1,0 +1,26 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Pregunta de Seguridad</h1>
+  <div mat-dialog-content>
+    <h3 class="subtitle">{{ question }}</h3>
+    <mat-form-field>
+      <mat-label>Respuesta</mat-label>
+      <input
+        title="answer"
+        type="password"
+        matInput
+        [(ngModel)]="answer"
+        required
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="check()">
+      <mat-icon>edit</mat-icon>
+      Comprobar
+    </button>
+  </div>
+</div>

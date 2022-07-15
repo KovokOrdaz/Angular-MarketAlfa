@@ -1,0 +1,92 @@
+<div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar Cliente" : "Registrar Cliente" }}
+  </h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Cedula o Pasaporte</mat-label>
+      <input
+        title="dni"
+        type="text"
+        matInput
+        [(ngModel)]="dni"
+        minlength="7"
+        numbersOnly
+        readonly="{{ StatusDni }}"
+        required
+        (blur)="dniValidation()"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre Completo</mat-label>
+      <input
+        title="name"
+        type="text"
+        matInput
+        [(ngModel)]="name"
+        minlength="6"
+        required
+        StringsOnly
+        (blur)="nameValidation()"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nacionalidad</mat-label>
+      <mat-select matInput [(ngModel)]="nationality" required>
+        <mat-option
+          *ngFor="let element of listNationality"
+          [value]="element.id"
+        >
+          {{ element.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Teléfono</mat-label>
+      <input
+        title="phone"
+        type="tel"
+        matInput
+        [disabled]="disableNumber"
+        [(ngModel)]="phone"
+        numbersOnly
+        minlength="6"
+        required
+        (blur)="phoneValidation()"
+      />
+    </mat-form-field>
+    <mat-checkbox
+      class="example-margin"
+      (click)="noNumberPhone()"
+      [(ngModel)]="disableNumber"
+    >
+      No posee Teléfono
+    </mat-checkbox>
+    <mat-form-field>
+      <mat-label>Dirección</mat-label>
+      <input
+        title="direction"
+        type="text"
+        matInput
+        [(ngModel)]="direction"
+        minlength="9"
+        required
+        (blur)="directionValidation()"
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
+</div>

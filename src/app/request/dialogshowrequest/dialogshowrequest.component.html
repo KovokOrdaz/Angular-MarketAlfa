@@ -1,0 +1,43 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Pedido: #{{ id }}</h1>
+  <div mat-dialog-content id="cardPDF">
+    <h3>Ditribuidor: {{ distributor }}</h3>
+    <h3>Recibido: {{ receive }}</h3>
+    <h3>Factura: {{ code }}</h3>
+    <table matSort style="width: 100%">
+      <tr>
+        <th mat-sort-header="name">Codigo</th>
+        <th mat-sort-header="name">Producto</th>
+        <th mat-sort-header="fat">Cantidad</th>
+        <th mat-sort-header="fat">Precio</th>
+        <th mat-sort-header="fat">Total</th>
+      </tr>
+
+      <tr *ngFor="let element of data">
+        <td>{{ element.product }}</td>
+        <td>
+          {{ element.name }}
+        </td>
+        <td>{{ element.amount }} {{ element.measure }}</td>
+        <td>{{ element.price }} {{ coin }}</td>
+        <td>{{ element.amount * element.price }} {{ coin }}</td>
+      </tr>
+      <tr>
+        <td colspan="4"><strong>Precio Total</strong></td>
+        <td>
+          <strong>{{ this.priceTotal }} {{ coin }}</strong>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button class="PDF" (click)="createPDF()">
+      <mat-icon matPrefix>picture_as_pdf</mat-icon>
+      PDF
+    </button>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cerrar
+    </button>
+  </div>
+</div>

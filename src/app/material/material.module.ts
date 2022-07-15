@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //Invocaciones e Injecciones
 @NgModule({
   declarations: [],
@@ -53,7 +54,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatProgressBarModule,
     MatMenuModule,
     MatBadgeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatAutocompleteModule
   ],
   exports:
   [
@@ -80,7 +82,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatProgressBarModule,
     MatMenuModule,
     MatBadgeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }

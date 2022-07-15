@@ -1,0 +1,155 @@
+<mat-tab-group mat-align-tabs="center" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+      Dia
+    </ng-template>
+    <div>
+      <mat-card style="width: 100">
+        <mat-card-title style="text-align: center">
+          Ventas del Dia - {{ date }}
+        </mat-card-title>
+        <mat-card-content></mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button color="primary" style="font-weight: 700">
+            Transacciones: {{ count }} °
+          </button>
+          <button mat-button color="primary" style="font-weight: 700">
+            Ventas Promedio: {{ averagePrice }} {{ coin }}
+          </button>
+          <button mat-button color="primary" style="font-weight: 700">
+            Ganancia Promedio: {{ averageProfit }} {{ coin }}
+          </button>
+          <button mat-button color="primary" style="font-weight: 700">
+            Productos Vendidos: {{ totalAmount }}
+          </button>
+          <button mat-button color="primary" style="font-weight: 700">
+            Ganancia Brutal: {{ totalPrice }} {{ coin }}
+          </button>
+          <button mat-button color="primary" style="font-weight: 700">
+            Ganancia Neta: {{ totalProfit }} {{ coin }}
+          </button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+      <div class="data">
+        <div class="info">
+          <mat-form-field class="search" appearance="outline">
+            <mat-label>Buscar Por Fecha</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Buscar..."
+              (keyup)="updateFilter($event)"
+            />
+            <mat-icon matSuffix>search</mat-icon>
+            <mat-hint
+              >Buscador a Tiempo Real de Ventas Por Dia (Valores Expresados en
+              {{ coin }})</mat-hint
+            >
+          </mat-form-field>
+        </div>
+        <ngx-datatable
+          class="material"
+          [rows]="rows"
+          [columnMode]="ColumnMode.force"
+          [columns]="columns"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          rowHeight="auto"
+          [limit]="7"
+          [selected]="selected"
+          [selectionType]="SelectionType.single"
+          (activate)="onActivate($event)"
+          (select)="onSelect($event)"
+          id="tablePDF"
+        >
+        </ngx-datatable>
+      </div>
+      <div class="selected-column" id="cardPDF">
+        <mat-card class="example-card">
+          <mat-card-subtitle>Venta Por Dia</mat-card-subtitle>
+          <mat-card-title>
+            {{ !selected.length ? "Seleccione Una Fecha" : "Información:" }}
+          </mat-card-title>
+
+          <mat-divider inset></mat-divider>
+          <mat-card-actions>
+            <mat-list *ngFor="let sel of selected">
+              <mat-list-item>
+                <strong>Dia: </strong> {{ sel.date }}
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Transacciones: </strong> {{ sel.countB }} °
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Precio Promedio: </strong> {{ sel.averagePrice }}
+                {{ coin }}
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Ganancia Promedio: </strong> {{ sel.averageProfit }}
+                {{ coin }}
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Producto Vendido: </strong> {{ sel.totalAmount }}
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Ganancia Bruta: </strong> {{ sel.totalPrice }}
+                {{ coin }}
+              </mat-list-item>
+              <mat-list-item>
+                <strong>Ganancia Neta: </strong> {{ sel.totalProfit }}
+                {{ coin }}
+              </mat-list-item>
+              <mat-list-item>
+                <button
+                  mat-raised-button
+                  class="buttonSC PDF"
+                  (click)="createPDF()"
+                >
+                  <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                  PDF
+                </button>
+                <!-- <button
+                  mat-raised-button
+                  class="buttonSC EXCEL"
+                  (click)="createExcel()"
+                >
+                  <mat-icon>vertical_split</mat-icon>
+                  EXCEL
+                </button> -->
+              </mat-list-item>
+              <mat-list-item>
+                <button
+                  mat-raised-button
+                  color="basic"
+                  (click)="clearSelection()"
+                >
+                  <mat-icon> clear_all</mat-icon>
+                  Deseleccionar
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Semana
+    </ng-template>
+    <app-buyweek></app-buyweek>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Mes
+    </ng-template>
+    <app-buymounth></app-buymounth>
+  </mat-tab>
+</mat-tab-group>

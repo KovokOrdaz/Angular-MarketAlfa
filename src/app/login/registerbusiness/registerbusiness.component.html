@@ -1,0 +1,126 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title>Market<em>Alfa</em></mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab label="Registrase Su Emprendimiento">
+        <mat-card-content>
+          <mat-card-content>
+            <div mat-dialog-content>
+              <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input
+                  title="name"
+                  type="text"
+                  matInput
+                  [(ngModel)]="name"
+                  minlength="6"
+                  required
+                  (blur)="nameValidation()"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Estructura Legal</mat-label>
+                <mat-select matInput [(ngModel)]="ls" required>
+                  <mat-option
+                    *ngFor="let element of listLS"
+                    [value]="element.id"
+                  >
+                    {{ element.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Registro Único de Información Fiscal</mat-label>
+                <input
+                  title="rif"
+                  type="text"
+                  matInput
+                  [(ngModel)]="rif"
+                  minlength="8"
+                  required
+                  (blur)="rifValidation()"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Teléfono</mat-label>
+                <input
+                  title="phone"
+                  type="tel"
+                  matInput
+                  [disabled]="disableNumber.value"
+                  [(ngModel)]="phone"
+                  numbersOnly
+                  minlength="6"
+                  required
+                  (blur)="phoneValidation()"
+                />
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Dirección</mat-label>
+                <input
+                  title="direction"
+                  type="text"
+                  matInput
+                  [(ngModel)]="direction"
+                  minlength="10"
+                  required
+                  (blur)="directionValidation()"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Correo Electrónico</mat-label>
+                <input
+                  title="mail"
+                  type="mail"
+                  matInput
+                  [(ngModel)]="mail"
+                  minlength="10"
+                  required
+                  (blur)="mailValidation()"
+                />
+                <mat-error>Use una direction de correo valida</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Moneda Local</mat-label>
+                <input
+                  title="coin"
+                  type="text"
+                  matInput
+                  [(ngModel)]="coin"
+                  minlength="3"
+                  StringsOnly
+                  required
+                  (blur)="coinValidation()"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Acrónimo</mat-label>
+                <input
+                  title="acronym"
+                  type="text"
+                  matInput
+                  [(ngModel)]="acronym"
+                  minlength="1"
+                  StringsOnly
+                  required
+                  (blur)="acronymValidation()"
+                />
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="primary"
+                class="login-button"
+                (click)="create()"
+              >
+                <mat-icon>edit</mat-icon>
+                Registrar
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

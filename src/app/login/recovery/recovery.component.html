@@ -1,11 +1,13 @@
 <mat-card-content>
-  <form action="">
+  <form [formGroup]="recoveryForm" (ngSubmit)="validUsername()">
     <mat-form-field>
       <input
         matInput
-        placeholder="Usuario"
-        name="username"
+        placeholder="Nombre Completo"
+        name="name"
+        formControlName="name"
         type="text"
+        [(ngModel)]="name"
         required
       />
       <!-- <mat-error *ngIf="username.invalid"
@@ -16,87 +18,20 @@
     <mat-form-field>
       <input
         matInput
-        placeholder="Correo Electronico"
-        name="mail"
-        type="mail"
+        placeholder="Usuario"
+        name="username"
+        formControlName="username"
+        type="text"
+        [(ngModel)]="username"
         required
       />
       <!-- <mat-error *ngIf="username.invalid"
           >Usuario es Requerido</mat-error
         > -->
-      <mat-icon matSuffix>mail</mat-icon>
+      <mat-icon matSuffix>account_circle</mat-icon>
     </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Nombre Completo"
-        name="name"
-        type="text"
-        required
-      />
-      <!-- <mat-error *ngIf="username.invalid"
-            >Usuario es Requerido</mat-error
-          > -->
-      <mat-icon matSuffix>perm_identity</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Nacionalidad</mat-label>
-      <mat-select>
-        <mat-option value="0"> Venezolano </mat-option>
-        <mat-option value="1"> Extranjero </mat-option>
-        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
-          </mat-option> -->
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Cedula o Pasaporte"
-        name="dni"
-        type="text"
-        required
-      />
-      <!-- <mat-error *ngIf="username.invalid"
-            >Usuario es Requerido</mat-error
-          > -->
-      <mat-icon matSuffix>insert_drive_file</mat-icon>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Telefono"
-        name="phone"
-        type="tel"
-        [disabled]="disableNumber.value"
-        required
-      />
-      <!-- <mat-error *ngIf="username.invalid"
-            >Usuario es Requerido</mat-error
-          > -->
-      <mat-icon matSuffix>phone</mat-icon>
-    </mat-form-field>
-    <mat-checkbox [formControl]="disableNumber"
-      >No poseo Numero de Telefono</mat-checkbox
-    >
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Seguridad Social"
-        name="securitySocial"
-        type="text"
-        [disabled]="disableSecurity.value"
-        required
-      />
-      <!-- <mat-error *ngIf="username.invalid"
-            >Usuario es Requerido</mat-error
-          > -->
-      <mat-icon matSuffix>confirmation_number</mat-icon>
-    </mat-form-field>
-    <mat-checkbox [formControl]="disableSecurity"
-      >No poseo Numero de Securidad Social</mat-checkbox
-    >
     <button
+      [disabled]="!recoveryForm.valid"
       mat-raised-button
       color="primary"
       type="submit"

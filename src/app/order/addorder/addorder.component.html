@@ -1,0 +1,41 @@
+<div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar " : "Registrar " }}
+  </h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Distribuidor</mat-label>
+      <mat-select
+        title="distributor"
+        matInput
+        [(ngModel)]="distributor"
+        required
+      >
+        <mat-option *ngFor="let element of listDist" [value]="element.id">
+          {{ element.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Entrega (Aproximado)</mat-label>
+      <input title="receive" matInput [matDatepicker]="picker" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
+</div>

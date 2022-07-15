@@ -1,5 +1,100 @@
-<div>
-  <button mat-raised-button color="primary" (click)="openCreate()">
-    Agregar Nuevo Pedido
-  </button>
+<div class="container">
+  <div class="module">
+    <p class="title">{{ title }}</p>
+    <div class="data">
+      <div class="info">
+        <mat-form-field class="search" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar..."
+            (keyup)="updateFilter($event)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Buscador a Tiempo Real de {{ title }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <mat-card class="example-card">
+        <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+        <mat-card-title>
+          {{ !selected.length ? "Opciones" : "Selecionado:" }}
+        </mat-card-title>
+
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <mat-list *ngIf="!selected.length">
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openCreate()"
+              >
+                <mat-icon matPrefix>add_circle_outline</mat-icon>
+                Agregar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC"
+                [routerLink]="['/order/inactive']"
+                color="warn"
+              >
+                <mat-icon matPrefix>filter_list</mat-icon>
+                Recibidos
+              </button>
+            </mat-list-item>
+            <!-- <mat-list-item>
+                  <button mat-raised-button class="buttonSC" color="basic">
+                    <mat-icon> pie_chart</mat-icon>
+                    Grafica
+                  </button>
+                </mat-list-item> -->
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC EXCEL"
+                (click)="createExcel()"
+              >
+                <mat-icon>vertical_split</mat-icon>
+                EXCEL
+              </button>
+            </mat-list-item>
+          </mat-list>
+          <mat-list *ngFor="let sel of selected">
+            <mat-list-item>Pedido: {{ sel.id }}</mat-list-item>
+            <mat-list-item>Distribuidor: {{ sel.distributor }}</mat-list-item>
+            <mat-list-item>Fecha de Emision: {{ sel.date }}</mat-list-item>
+            <mat-list-item> Fecha de Lleagada: {{ sel.recieve }}</mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button color="basic">Recibir</button>
+              <button mat-raised-button color="warn" (click)="delete(sel)">
+                Eliminar
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>

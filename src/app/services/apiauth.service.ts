@@ -11,7 +11,7 @@ const httpOption = {headers: new HttpHeaders({'Contend-Type': 'application/json'
 @Injectable ({providedIn: 'root'})
 export class ApiAuthService
 {
-    url: string = 'https://localhost:7241/User/login';
+    url: string = 'https://localhost:7241/login';
 
     private userSubject: BehaviorSubject<User>;
 
@@ -28,15 +28,20 @@ export class ApiAuthService
         this.user = this.userSubject.asObservable();
     }
 
-    login(login: Login): Observable<Result>
+    login(xlogin: Login): Observable<Result>
     {
-        return this._http.post<Result>(this.url, login, httpOption).pipe(map(x => 
+        console.log("Hola 2");
+        return this._http.post<Result>(this.url, xlogin, httpOption).pipe(map(x => 
             {
                 if(x.success === 1)
                 {
                     const user: User = x.data;
                     localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
+                }
+                else
+                {
+                    console.log(x);
                 }
                 return x;
             }));
@@ -45,6 +50,7 @@ export class ApiAuthService
     logout()
     {
         localStorage.removeItem('user');
+
         this.userSubject.next(null!);
     }
 }

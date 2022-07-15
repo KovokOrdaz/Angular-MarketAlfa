@@ -1,0 +1,30 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Retirar {{ name }} del Lote #{{ lot }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Razón o Motivo para Retirar Lote</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Razón o Motivo"
+        name="reason"
+        [(ngModel)]="reason"
+        minlength="9"
+        required
+      />
+      <mat-error> La Razón o Motivo debe ser mayor 10 caracteres </mat-error>
+      <mat-hint> La Razón o Motivo debe ser mayor 10 caracteres </mat-hint>
+      <mat-icon matSuffix>question_answer</mat-icon>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="change()">
+      <mat-icon>edit</mat-icon>
+      Confirmar
+    </button>
+  </div>
+</div>

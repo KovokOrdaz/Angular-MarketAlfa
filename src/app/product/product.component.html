@@ -23,24 +23,47 @@
         [headerHeight]="50"
         [footerHeight]="50"
         rowHeight="auto"
-        [limit]="5"
+        [limit]="10"
         [selected]="selected"
         [selectionType]="SelectionType.single"
         (activate)="onActivate($event)"
         (select)="onSelect($event)"
+        id="tablePDF"
       >
       </ngx-datatable>
     </div>
     <div class="selected-column">
       <mat-card class="example-card">
         <mat-card-subtitle>{{ title }}</mat-card-subtitle>
-        <mat-card-title>{{
-          !selected.length ? "Opciones" : selected.name
-        }}</mat-card-title>
+        <mat-card-title>
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
+        </mat-card-title>
 
         <mat-divider inset></mat-divider>
         <mat-card-actions>
           <mat-list *ngIf="!selected.length">
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                class="buttonSC"
+                [routerLink]="['/product/category']"
+              >
+                <mat-icon matPrefix>group_work</mat-icon>
+                Categorías
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                class="buttonSC"
+                [routerLink]="['/product/measure']"
+              >
+                <mat-icon matPrefix>group_work</mat-icon>
+                Medidas
+              </button>
+            </mat-list-item>
             <mat-list-item>
               <button
                 mat-raised-button
@@ -53,54 +76,62 @@
               </button>
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button class="buttonSC" color="warn">
+              <button
+                mat-raised-button
+                class="buttonSC"
+                [routerLink]="['/product/inactive']"
+                color="warn"
+              >
                 <mat-icon matPrefix>filter_list</mat-icon>
                 Inactivos
               </button>
             </mat-list-item>
+            <mat-divider></mat-divider>
             <mat-list-item>
-              <button mat-raised-button class="buttonSC" color="basic">
-                <mat-icon> pie_chart</mat-icon>
-                Grafica
-              </button>
-            </mat-list-item>
-            <mat-list-item>
-              <button mat-raised-button class="buttonSC PDF">
+              <button
+                mat-raised-button
+                class="buttonSC PDF"
+                (click)="createPDF()"
+              >
                 <mat-icon matPrefix>picture_as_pdf</mat-icon>
                 PDF
               </button>
             </mat-list-item>
-            <mat-list-item>
-              <button mat-raised-button class="buttonSC EXCEL">
+            <!-- <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC EXCEL"
+                (click)="createExcel()"
+              >
                 <mat-icon>vertical_split</mat-icon>
                 EXCEL
               </button>
-            </mat-list-item>
+            </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nacionalidad: {{ sel.nationality }}</mat-list-item>
-            <mat-list-item>Cedula o Pasaporte: {{ sel.dni }}</mat-list-item>
-            <mat-list-item>Ocupacion: {{ sel.job }}</mat-list-item>
-            <mat-list-item>Entrada: {{ sel.input }}</mat-list-item>
-            <mat-list-item>Salida: {{ sel.output }}</mat-list-item>
-            <mat-list-item
-              >Fecha de Nacimiento: {{ sel.dateOfBirth }}</mat-list-item
-            >
-            <mat-list-item
-              >Numero de Seguridad Social:
-              {{ sel.socialSecurity }}</mat-list-item
-            >
-            <mat-list-item>Numero de Telefono: {{ sel.phone }}</mat-list-item>
-            <mat-list-item>Salario: {{ sel.salary }}</mat-list-item>
-            <mat-list-item>Modalidad de Pago: {{ sel.datePay }}</mat-list-item>
-            <mat-list-item>Es Usuario: {{ sel.isUser }}</mat-list-item>
-            <mat-list-item>Fecha de Registro: {{ sel.date }}</mat-list-item>
+            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
+            <mat-list-item>Codigo: {{ sel.code }}</mat-list-item>
+            <mat-list-item>Categoria: {{ sel.category }}</mat-list-item>
+            <mat-list-item>Medida: {{ sel.description }}</mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic">
-                <mat-icon>edit</mat-icon>Edtiar
+              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+                <mat-icon>edit</mat-icon>
+                Edtiar
               </button>
-              <button mat-raised-button color="warn">
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button color="warn" (click)="delete(sel)">
                 <mat-icon>close</mat-icon>Inactivar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                (click)="clearSelection()"
+              >
+                <mat-icon> clear_all</mat-icon>
+                Deseleccionar
               </button>
             </mat-list-item>
           </mat-list>

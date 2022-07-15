@@ -1,0 +1,155 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Venta</h1>
+  <div mat-dialog-content>
+    <table style="width: 90%; padding: 5px; margin: auto" cellspacing="0">
+      <tr>
+        <td style="width: 8%">
+          <button
+            style="width: 100%; padding: 5px"
+            mat-raised-button
+            (click)="openCreateClient()"
+          >
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </td>
+        <td style="width: 90%; margin: auto">
+          <mat-form-field style="width: 100%">
+            <mat-label>Cliente</mat-label>
+            <input
+              type="text"
+              matInput
+              [matAutocomplete]="auto"
+              [(ngModel)]="buy.client"
+              placeholder="Cliente"
+              (ngModelChange)="listClient = filterStates(buy.client)"
+              (blur)="resetList()"
+              required
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let element of listClient"
+                [value]="element.dni"
+              >
+                {{ element.dni }} - {{ element.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <form [formGroup]="formConcept" (ngSubmit)="addContent()">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <span matSuffix style="font-size: 20px">
+                {{ nameProduct }}
+              </span>
+              <mat-label>Producto</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="product"
+                placeholder="Producto"
+                [matAutocomplete]="Product"
+                (blur)="codeMeasure()"
+              />
+              <mat-autocomplete #Product="matAutocomplete">
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option.code"
+                >
+                  {{ option.code }} - {{ option.name }} - Existencia:
+                  {{ option.amount }}
+                  {{ option.measure }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Cantidad</mat-label>
+              <input
+                type="number"
+                formControlName="amount"
+                matInput
+                placeholder="Cantidad"
+                min="0"
+                onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+                (blur)="amountValidation()"
+              />
+              <span matSuffix
+                ><strong>{{ this.measureDec }}</strong></span
+              >
+            </mat-form-field>
+          </td>
+          <td>
+            <button
+              style="width: 100%"
+              type="submit"
+              [disabled]="!formConcept.valid"
+              mat-raised-button
+            >
+              +
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <div>
+      <table style="width: 100%; font-size: 16px; text-align: center">
+        <ng-container *ngIf="concept.length > 0; else noProduct">
+          <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+          </tr>
+          <tr *ngFor="let item of concept">
+            <td>{{ item.product }}</td>
+            <td>
+              {{ getName(item.product) }}
+            </td>
+            <td>{{ item.amount }} {{ getMeasure(item.product) }}</td>
+            <td>{{ item.price }} {{ coin }}</td>
+            <td>{{ item.price * item.amount }} {{ coin }}</td>
+            <td>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteConcept(item.product)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>Precio Total</strong></td>
+            <td>
+              <strong>{{ this.priceTotal }} {{ coin }}</strong>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noProduct>
+          <tr>
+            <td colspan="5" style="margin: 20px">
+              No Hay Productos Registrado en la Venta
+            </td>
+          </tr>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="addBuy()">
+      <mat-icon>edit</mat-icon>
+      Registrar
+    </button>
+  </div>
+</div>

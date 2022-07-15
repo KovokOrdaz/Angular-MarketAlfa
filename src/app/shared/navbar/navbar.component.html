@@ -1,4 +1,4 @@
-<ng-container *ngIf="true">
+<ng-container *ngIf="user">
   <mat-toolbar class="navbar" color="primary">
     <button
       mat-icon-button
@@ -10,41 +10,113 @@
     </button>
     <span>MarketAlfa</span>
     <span class="example-spacer"></span>
+
+    <ng-container *ngIf="user.privilege && ListLow.length > 0">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuLow"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon color="warn">warning</mat-icon>
+      </button>
+      <mat-menu #menuLow="matMenu" class="expired">
+        <ng-container *ngFor="let element of ListLow">
+          <button mat-menu-item [routerLink]="['/inventary/lot']">
+            <mat-icon color="warn">warning</mat-icon>
+            <span
+              >El Producto
+              <strong>{{ element.name }}</strong>
+              Del Lote<strong> # {{ element.lot }}</strong> Esta Cerca de
+              Caducar
+              <strong>({{ element.expiration | date: "MM/dd/yyyy" }})</strong>
+            </span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
+
     <button
+      *ngIf="user.privilege"
       mat-icon-button
-      [matMenuTriggerFor]="menu"
+      [matMenuTriggerFor]="menuOrder"
       aria-label="Example icon-button with a menu"
     >
-      <mat-icon matBadge="8" matBadgePosition="before" matBadgeColor="warn">{{
-        true ? "notifications" : "notifications_active"
-      }}</mat-icon>
+      <mat-icon> local_shipping</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Estrelle es una rata con pelo XD</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
-      </button>
+    <mat-menu #menuOrder="matMenu">
+      <ng-container *ngIf="ListOrder.length > 0; else noOrder">
+        <ng-container *ngFor="let element of ListOrder">
+          <button mat-menu-item (click)="openDeliverid(element)">
+            <mat-icon>local_shipping</mat-icon>
+            <span>
+              <strong>#{{ element.id }}</strong>
+              - {{ element.distributor }} -
+              <strong>{{ element.date | date: "MM/dd/yyyy" }}</strong>
+            </span>
+          </button>
+        </ng-container>
+      </ng-container>
+      <ng-template #noOrder>
+        <button mat-menu-item [routerLink]="['/order']">
+          <mat-icon>local_shipping</mat-icon>
+          <span> No Hay Orden Proxima </span>
+        </button>
+      </ng-template>
+    </mat-menu>
+
+    <button
+      *ngIf="user.privilege"
+      mat-icon-button
+      [matMenuTriggerFor]="menuProduct"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon
+        matBadgePosition="before"
+        matBadge="{{ ListProduct.length }}"
+        matBadgeColor="warn"
+      >
+        {{ ListProduct.length < 1 ? "notifications" : "notifications_active" }}
+      </mat-icon>
+    </button>
+    <mat-menu #menuProduct="matMenu">
+      <ng-container *ngIf="ListProduct.length > 0; else noProduct">
+        <ng-container *ngFor="let element of ListProduct">
+          <button mat-menu-item (click)="openOrder(element.code, element.name)">
+            <mat-icon>category</mat-icon>
+            <span>
+              {{ element.name }} quedan
+              <strong>{{ element.amount }} - {{ element.measure }}</strong>
+            </span>
+          </button>
+        </ng-container>
+      </ng-container>
+      <ng-template #noProduct>
+        <button mat-menu-item>
+          <mat-icon>local_shipping</mat-icon>
+          <span> No Hay Alerta de Productos </span>
+        </button>
+      </ng-template>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="belowMenu">
       <mat-icon> person_pin</mat-icon>
-      <span> Mario Ordaz</span>
+      <span> {{ user.username }}</span>
     </button>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openBook()">
+        <mat-icon>book</mat-icon>
+        Manual
+      </button>
+      <button *ngIf="user.privilege" mat-menu-item (click)="myBusinessSeting()">
         <mat-icon>store</mat-icon>
         Mi Negocio
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="change()">
         <mat-icon>settings</mat-icon>
-        Ajustes
+        Cambiar Contraseña
+      </button>
+      <button mat-menu-item (click)="changeAnswer()">
+        <mat-icon>security</mat-icon>
+        Cambiar Pregunta de Seguridad
       </button>
       <button class="exit" mat-menu-item (click)="logout()">
         <mat-icon>power_settings_new</mat-icon>
@@ -56,47 +128,39 @@
 
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="side">
-    <ng-container *ngIf="true">
+    <ng-container *ngIf="user">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['/home']">
-          <mat-icon>home</mat-icon>
-          Inicio
+        <a mat-list-item [routerLink]="['/buy']">
+          <mat-icon>shopping_cart</mat-icon>
+          Ventas
         </a>
-        <a mat-list-item [routerLink]="['/product']">
-          <mat-icon> category</mat-icon>
-          Productos
-        </a>
-        <a mat-list-item [routerLink]="['/client']">
-          <mat-icon> import_export</mat-icon>
-          Transaciones
-        </a>
-        <a mat-list-item [routerLink]="['/client']">
+        <a mat-list-item [routerLink]="['/inventary']">
           <mat-icon>playlist_add_check</mat-icon>
           Inventario
         </a>
-        <a mat-list-item [routerLink]="['/client']">
-          <mat-icon>shopping_cart</mat-icon>
-          Venta
+        <a *ngIf="user.privilege" mat-list-item [routerLink]="['/order']">
+          <mat-icon>playlist_add</mat-icon>
+          Ordenes
         </a>
-        <a mat-list-item [routerLink]="['/client']">
+        <a mat-list-item *ngIf="user.privilege" [routerLink]="['/report']">
+          <mat-icon>library_books</mat-icon>
+          Reportes
+        </a>
+        <a mat-list-item *ngIf="user.privilege" [routerLink]="['/product']">
+          <mat-icon> category</mat-icon>
+          Productos
+        </a>
+        <a mat-list-item *ngIf="user.privilege" [routerLink]="['/client']">
           <mat-icon>group</mat-icon>
           Clientes
         </a>
-        <a mat-list-item [routerLink]="['/client']">
-          <mat-icon>euro_symbol</mat-icon>
-          Divisas
-        </a>
-        <a mat-list-item [routerLink]="['/client']">
+        <a mat-list-item *ngIf="user.privilege" [routerLink]="['/distributor']">
           <mat-icon> local_shipping</mat-icon>
           Proveedores
         </a>
-        <a mat-list-item [routerLink]="['/academic']">
+        <a mat-list-item *ngIf="user.privilege" [routerLink]="['/user']">
           <mat-icon>work_outline</mat-icon>
-          Empleados
-        </a>
-        <a mat-list-item [routerLink]="['/order']">
-          <mat-icon>playlist_add</mat-icon>
-          Ordenes
+          Usuarios
         </a>
       </mat-nav-list>
     </ng-container>

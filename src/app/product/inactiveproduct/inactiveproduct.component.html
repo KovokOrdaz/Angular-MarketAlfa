@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="module">
+    <p class="title">{{ title }}</p>
+    <div class="data">
+      <div class="info">
+        <mat-form-field class="search" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar..."
+            (keyup)="updateFilter($event)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Buscador a Tiempo Real de {{ title }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <mat-card class="example-card">
+        <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+        <mat-card-title>
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
+        </mat-card-title>
+
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <mat-list *ngIf="!selected.length">
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC"
+                [routerLink]="['/product']"
+                color="warn"
+              >
+                <mat-icon>arrow_back</mat-icon>
+                Regresar
+              </button>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC PDF"
+                (click)="createPDF()"
+              >
+                <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                PDF
+              </button>
+            </mat-list-item>
+            <!-- <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC EXCEL"
+                (click)="createExcel()"
+              >
+                <mat-icon>vertical_split</mat-icon>
+                EXCEL
+              </button>
+            </mat-list-item> -->
+          </mat-list>
+          <mat-list *ngFor="let sel of selected">
+            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
+            <mat-list-item>Código: {{ sel.code }}</mat-list-item>
+            <mat-list-item>Motivo O Razón: {{ sel.reason }}</mat-list-item>
+            <mat-list-item>
+              Fecha de Inhabilitación: {{ sel.date }}</mat-list-item
+            >
+            <mat-list-item>Por: {{ sel.user }}</mat-list-item>
+            <mat-list-item>
+              <button mat-raised-button color="primary" (click)="delete(sel)">
+                <mat-icon>check_circle_outline</mat-icon>
+                Activar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                (click)="clearSelection()"
+              >
+                <mat-icon> clear_all</mat-icon>
+                Deseleccionar
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="module">
+    <p class="title">{{ title }}</p>
+    <div class="data">
+      <div class="info">
+        <mat-form-field class="search" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar..."
+            (keyup)="updateFilter($event)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Buscador a Tiempo Real de {{ title }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columnMode]="ColumnMode.force"
+        [columns]="columns"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [limit]="5"
+        [selected]="selected"
+        [selectionType]="SelectionType.single"
+        (activate)="onActivate($event)"
+        (select)="onSelect($event)"
+        id="tablePDF"
+      >
+      </ngx-datatable>
+    </div>
+    <div class="selected-column">
+      <mat-card class="example-card">
+        <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+        <mat-card-title>
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
+        </mat-card-title>
+
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <mat-list *ngIf="!selected.length">
+            <ng-container *ngIf="user.privilege">
+              <mat-list-item>
+                <button
+                  mat-raised-button
+                  class="buttonSC"
+                  [routerLink]="['/inventary/lot']"
+                  color="warn"
+                >
+                  <mat-icon>arrow_back</mat-icon>
+                  Regresar
+                </button>
+              </mat-list-item>
+              <!-- <mat-list-item>
+                <button mat-raised-button class="buttonSC" color="basic">
+                  <mat-icon> pie_chart</mat-icon>
+                  Grafica
+                </button>
+              </mat-list-item> -->
+              <mat-divider></mat-divider>
+              <mat-list-item>
+                <button
+                  mat-raised-button
+                  class="buttonSC PDF"
+                  (click)="createPDF()"
+                >
+                  <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                  PDF
+                </button>
+              </mat-list-item>
+            </ng-container>
+          </mat-list>
+          <mat-list *ngFor="let sel of selected">
+            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
+            <mat-list-item>Código: {{ sel.code }}</mat-list-item>
+            <mat-list-item>Categoría: {{ sel.category }}</mat-list-item>
+            <mat-list-item>Lote: {{ sel.lot }}</mat-list-item>
+            <mat-list-item>Fecha de Entrada: {{ sel.date }}</mat-list-item>
+            <mat-list-item>Cantidad: {{ sel.amount }}</mat-list-item>
+            <mat-list-item>Vendido: {{ sel.sold }}</mat-list-item>
+            <mat-list-item>Ingresado Por: {{ sel.registeredBy }}</mat-list-item>
+            <mat-list-item>
+              Fecha de Expiración: {{ sel.expiration }}
+            </mat-list-item>
+            <ng-container *ngIf="user.privilege">
+              <mat-list-item>
+                <button
+                  mat-raised-button
+                  color="basic"
+                  (click)="clearSelection()"
+                >
+                  <mat-icon> clear_all</mat-icon>
+                  Deseleccionar
+                </button>
+              </mat-list-item>
+            </ng-container>
+          </mat-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

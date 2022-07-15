@@ -1,8 +1,8 @@
-export interface Distributor
-{
-    Id: number;
-    Name: string;
-    Rif: string;
-    Phone: string;
-    Ls: string;
+export interface Distributor {
+  id: number;
+  name: string;
+  rif: string;
+  ls: number;
+  status: boolean;
+  registeredBy: number;
 }

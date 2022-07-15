@@ -1,0 +1,47 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Cambiar Alertas</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Cantidad de Alerta</mat-label>
+      <input
+        title="low"
+        type="number"
+        matInput
+        [(ngModel)]="low"
+        min="0"
+        onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+        required
+        (blur)="lowValidation()"
+      />
+      <span matSuffix>
+        <strong>{{ this.measureDec }}</strong>
+      </span>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cantidad de Reserva (No Venta)</mat-label>
+      <input
+        title="lock"
+        type="number"
+        matInput
+        [(ngModel)]="lock"
+        min="0"
+        onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+        required
+        (blur)="lockValidation()"
+      />
+      <span matSuffix>
+        <strong>{{ this.measureDec }}</strong>
+      </span>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="create()">
+      <mat-icon>edit</mat-icon>
+      Registrar
+    </button>
+  </div>
+</div>

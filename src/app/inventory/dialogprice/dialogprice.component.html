@@ -1,0 +1,31 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Modificar Precio</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Nuevo Precio</mat-label>
+      <input
+        title="price"
+        type="number"
+        matInput
+        [(ngModel)]="money"
+        min="0"
+        onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+        required
+        (blur)="moneyValidation()"
+      />
+      <span matSuffix>
+        <strong>{{ coin }}</strong>
+      </span>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="create()">
+      <mat-icon>edit</mat-icon>
+      Registrar
+    </button>
+  </div>
+</div>

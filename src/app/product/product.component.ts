@@ -6,6 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from '../models/product';
 import { ApiProductService } from '../services/apiproduct.service';
 import { ColumnMode, DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
+import { ExportExcelService } from '../services/exportexcel.service';
+import { ToastrService } from 'ngx-toastr';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { ApiAuthService } from '../services/apiauth.service';
+import { User } from '../models';
+import { Router } from '@angular/router';
+import { DialoginactiveproductComponent } from './dialoginactiveproduct/dialoginactiveproduct.component';
 
 @Component({
   selector: 'app-product',
@@ -17,28 +25,32 @@ export class ProductComponent implements OnInit {
   @ViewChild(DatatableComponent) table!: DatatableComponent;
   rows: Product[] = [];
   temp: Product[] = [];
-  selected:any = [];
+  selected: any = [];
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
+  user !: User;
 
   columns: any[] = [
-    { prop: 'name', name:'Nombre' }, 
-    { prop: 'nationality', name: 'Nacionalidad' }, 
-    { prop: 'dni', name: 'Cedula o Pasaporte'},
-    { prop: 'phone', name:'Telefono' },];
-readonly width: string = '600px';
-  
-  constructor(private api: ApiProductService, public dialog: MatDialog, public snackBar: MatSnackBar){}
+    { prop: 'name', name: 'Nombre' },
+    { prop: 'code', name: 'Código' },
+    { prop: 'category', name: 'Categoría' },
+    { prop: 'description', name: 'Medida' },
+    { prop: 'registeredBy', name: 'Registrado Por' },
+  ];
 
-  ngOnInit(): void 
-  {
+  constructor(private api: ApiProductService, public apiAuth: ApiAuthService, private router: Router, private excel: ExportExcelService, public dialog: MatDialog, public snackBar: MatSnackBar, public Toastr: ToastrService) {
+    this.apiAuth.user.subscribe(x => { if (x.privilege) { this.user = x } else { this.router.navigate(['/']); } });
+  }
+
+  ngOnInit(): void {
     this.read();
   }
 
-  read()
-  {
-    this.api.read().subscribe(x=>{ this.rows = x.data;
-      this.temp = this.rows;});
+  read() {
+    this.api.read().subscribe(x => {
+      this.rows = x.data;
+      this.temp = this.rows;
+    });
   }
 
   onSelect({ }) {
@@ -49,7 +61,7 @@ readonly width: string = '600px';
     console.log('Activate Event', event);
   }
 
-  updateFilter(event:any) {
+  updateFilter(event: any) {
     const val = event.target.value.toLowerCase();
 
     // filter our data
@@ -63,36 +75,73 @@ readonly width: string = '600px';
     this.table.offset = 0;
   }
 
-
-  openCreate()
-  {
-    const dialogRef = this.dialog.open(DialogProductComponent, {width: this.width});
-    dialogRef.afterClosed().subscribe(finish => {this.read()});
-  }
-  
-  openEdit(entity: Product)
-  {
-    const dialogRef = this.dialog.open(DialogProductComponent, {width: this.width, data: entity});
-    dialogRef.afterClosed().subscribe(finish => {this.read()});
+  clearSelection(): void {
+    this.selected = [];
   }
 
-  delete(entity: Product)
-  {
-    const dialogRef = this.dialog.open(DialogDeleteComponent, {width: this.width, data: entity});
-    dialogRef.afterClosed().subscribe(finish => 
-      {
-        if(finish)
-        {
-          this.api.delete(entity.id).subscribe(result => 
-            {
-              if(result.success === 1)
-              {
-                this.snackBar.open('Registro Academico Eliminado Correctamente','',{duration: 2000});
-                this.read();
-              }
-            });
-        }
-      });
+  openCreate() {
+    const dialogRef = this.dialog.open(DialogProductComponent);
+    dialogRef.afterClosed().subscribe(finish => { this.read() });
+    this.clearSelection();
   }
 
+  openEdit(entity: Product) {
+    const dialogRef = this.dialog.open(DialogProductComponent, { data: entity });
+    dialogRef.afterClosed().subscribe(finish => { this.read() });
+    this.clearSelection();
+  }
+
+  delete(entity: Product) {
+    const dialogRef = this.dialog.open(DialoginactiveproductComponent, { data: entity });
+    dialogRef.afterClosed().subscribe(finish => { this.read() });
+    this.clearSelection();
+  }
+
+  // delete(entity: Product)
+  // {
+  //   const dialogRef = this.dialog.open(DialogDeleteComponent, {data: entity});
+  //   dialogRef.afterClosed().subscribe(finish =>
+  //     {
+  //       if(finish)
+  //       {
+  //         this.api.delete(entity.code).subscribe(result =>
+  //           {
+  //             if(result.success === 1)
+  //             {
+  //               this.Toastr.info('Registro Inactivado','MarketAlfaApp');
+  //               this.read();
+  //               this.selected = [];
+  //             }
+  //           });
+  //       }
+  //     });
+  // }
+
+  createPDF() {
+    const DATA = document.getElementById('tablePDF');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`Productos_MarketAlfa.pdf`);
+    });
+  }
+
+  createExcel(): void {
+    this.excel.create(this.temp, this.title);
+  }
 }

@@ -1,0 +1,89 @@
+<mat-tab-group mat-align-tabs="center" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+      Ventas Por Medidas (Hoy)
+    </ng-template>
+    <div>
+      <app-measureday></app-measureday>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Ventas Por Medidas (Semana)
+    </ng-template>
+    <app-measureweek></app-measureweek>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Ventas Por Medidas (Mes)
+    </ng-template>
+    <app-measuremount></app-measuremount>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> bar_chart</mat-icon>
+      Ventas Por Medidas (General)
+    </ng-template>
+    <mat-card style="width: 100%">
+      <mat-card-title style="text-align: center; padding: 20px">
+        Ventas Por Medidas (General)
+      </mat-card-title>
+      <mat-divider inset></mat-divider>
+      <mat-card-content style="min-height: 500px" id="cardPDF">
+        <mat-card-subtitle>Ventas Por Medidas En General </mat-card-subtitle>
+        <div style="width: 550px; margin: 10px">
+          <ngx-charts-pie-chart
+            [view]="view"
+            scheme="vivid"
+            [results]="single"
+            [gradient]="gradient"
+            [legend]="showLegend"
+            [legendPosition]="legendPosition"
+            [labels]="showLabels"
+            [doughnut]="isDoughnut"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
+          >
+          </ngx-charts-pie-chart>
+        </div>
+        <div style="width: auto; margin-right: 30px">
+          <ngx-datatable
+            style="max-width: 1000px"
+            class="material"
+            [rows]="rows"
+            [columnMode]="ColumnMode.force"
+            [columns]="columns"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [selected]="selected"
+            [selectionType]="SelectionType.single"
+            (activate)="onActivate($event)"
+            (select)="onSelect($event)"
+          >
+          </ngx-datatable>
+        </div>
+        <div class="info" style="margin: 5px">
+          <strong>Nota:</strong>
+          La Ganancia esta Expresada en el Valor de la Moneda Local
+          <strong>( {{ coin }} )</strong>
+        </div>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button mat-raised-button class="buttonSC PDF" (click)="createPDF()">
+          <mat-icon matPrefix>picture_as_pdf</mat-icon>
+          PDF
+        </button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
