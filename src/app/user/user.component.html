@@ -77,15 +77,26 @@
             </mat-list-item>
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>PSeudonimo: {{ sel.pseudomyn }}</mat-list-item>
-            <mat-list-item>Fecha de Registro: {{ sel.date }}</mat-list-item>
-            <mat-list-item
-              >Rol:
-              {{ sel.privilege ? "Administrador" : "Usuario" }}</mat-list-item
-            >
             <mat-list-item>
-              <button mat-raised-button color="warn" (click)="delete(sel)">
+              <strong>Nombre: </strong>{{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>PSeudonimo:</strong> {{ sel.pseudomyn }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Registro:</strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Rol:</strong>
+              {{ sel.privilege ? "Administrador" : "Usuario" }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="warn"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
                 <mat-icon>close</mat-icon>
                 Inactivar
               </button>
@@ -94,6 +105,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

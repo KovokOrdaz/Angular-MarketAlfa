@@ -31,6 +31,7 @@ export class BuyComponent implements OnInit {
   columns: any[] = [];
 
   constructor(private api: ApibuyService, public apiAuth: ApiAuthService, private excel: ExportExcelService, public dialog: MatDialog, private router: Router, public Toastr: ToastrService) { }
+
   ngOnInit(): void {
     this.read();
   }

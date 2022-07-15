@@ -35,14 +35,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .data
 {
-    float: left; 
+    float: left;
     width: 70%;
 }
 
 .selected-column
 {
     margin-top: 14px;
-    float: right; 
+    float: right;
     width: 25%;
 }
 
@@ -148,4 +148,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 45%;
     margin: auto;
     padding: 6px;
+}
+
+table
+{
+  width: 100%;
 }

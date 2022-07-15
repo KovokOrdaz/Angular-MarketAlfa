@@ -1,82 +1,111 @@
 <div class="dialog">
   <h1 mat-dialog-title>Registrar Usuario</h1>
   <div mat-dialog-content>
-    <mat-form-field>
-      <mat-label>Nombre Completo</mat-label>
-      <input
-        title="name"
-        type="text"
-        matInput
-        [(ngModel)]="name"
-        minlength="6"
-        StringsOnly
-        required
-        (blur)="nameValidation()"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Pseudonimo</mat-label>
-      <input
-        title="pseudonym"
-        type="text"
-        matInput
-        [(ngModel)]="pseudomyn"
-        minlength="6"
-        required
-        (blur)="pseudomynValidation()"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Contraseña</mat-label>
-      <input
-        title="password"
-        type="password"
-        matInput
-        [(ngModel)]="password"
-        minlength="8"
-        required
-        (blur)="passwordValidation()"
-      />
-      <mat-error>
-        La Contraseña debe tener al Menos 8 caracteres, 1 Mayúscula, 1 Minúscula
-        y 1 Especial
-      </mat-error>
-      <mat-hint>
-        La Contraseña debe tener al Menos 8 caracteres, 1 Mayúscula, 1 Minúscula
-        y 1 Especial
-      </mat-hint>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label
-        >Pregunta de Seguridad (en caso de perder su Contraseña)</mat-label
-      >
-      <input
-        title="question"
-        type="text"
-        matInput
-        [(ngModel)]="question"
-        minlength="10"
-        required
-        (blur)="questionValidation()"
-      />
-      <mat-error> La Pregunta Debe tener al menos 10 Caracteres </mat-error>
-      <mat-hint> La Pregunta Debe tener al menos 10 Caracteres </mat-hint>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Respuestas</mat-label>
-      <input
-        title="answer"
-        type="text"
-        matInput
-        [(ngModel)]="answer"
-        minlength="3"
-        required
-        (blur)="answerValidation()"
-      />
-    </mat-form-field>
-    <mat-checkbox class="example-margin" [(ngModel)]="privilege"
-      >Es Un Usuario Administrador</mat-checkbox
-    >
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>Nombre Completo</mat-label>
+            <input
+              title="name"
+              type="text"
+              matInput
+              [(ngModel)]="name"
+              minlength="6"
+              StringsOnly
+              required
+              (blur)="nameValidation()"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>Pseudónimo</mat-label>
+            <input
+              title="pseudonym"
+              type="text"
+              matInput
+              [(ngModel)]="pseudomyn"
+              minlength="6"
+              required
+              (blur)="pseudomynValidation()"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input
+              title="password"
+              type="password"
+              matInput
+              [(ngModel)]="password"
+              minlength="8"
+              required
+              (blur)="passwordValidation()"
+            />
+            <mat-error>
+              La Contraseña debe tener al Menos 8 caracteres, 1 Mayúscula, 1
+              Minúscula y 1 Especial
+            </mat-error>
+            <mat-hint>
+              La Contraseña debe tener al Menos 8 caracteres, 1 Mayúscula, 1
+              Minúscula y 1 Especial
+            </mat-hint>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label
+              >Pregunta de Seguridad (en caso de perder su
+              Contraseña)</mat-label
+            >
+            <input
+              title="question"
+              type="text"
+              matInput
+              [(ngModel)]="question"
+              minlength="10"
+              required
+              (blur)="questionValidation()"
+            />
+            <mat-error>
+              La Pregunta Debe tener al menos 10 Caracteres
+            </mat-error>
+            <mat-hint> La Pregunta Debe tener al menos 10 Caracteres </mat-hint>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>Respuestas</mat-label>
+            <input
+              title="answer"
+              type="text"
+              matInput
+              [(ngModel)]="answer"
+              minlength="3"
+              required
+              (blur)="answerValidation()"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox class="example-margin" [(ngModel)]="privilege">
+            Es Un Usuario Administrador
+          </mat-checkbox>
+        </td>
+      </tr>
+    </table>
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button color="warn" (click)="close()">
