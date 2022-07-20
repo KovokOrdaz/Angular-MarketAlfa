@@ -9,8 +9,7 @@ import { ApilotService } from 'src/app/services/apilot.service';
 
 @Component({
   selector: 'app-retreat',
-  templateUrl: './retreat.component.html',
-  styleUrls: ['./retreat.component.scss']
+  templateUrl: './retreat.component.html'
 })
 export class RetreatComponent implements OnInit {
 

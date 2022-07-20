@@ -15,7 +15,6 @@ import { CategoryComponent } from './product/category/category.component';
 import { MeasureComponent } from './product/measure/measure.component';
 import { InactiveProductComponent } from './product/inactiveproduct/inactiveproduct.component';
 import { UserComponent } from './user/user.component';
-import { OrdermdComponent } from './ordermd/ordermd.component';
 import { RegisterBusinessComponent } from './login/registerbusiness/registerbusiness.component';
 import { RegisteruserComponent } from './login/registeruser/registeruser.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -43,7 +42,7 @@ const routes: Routes = [
   { path: 'inventary/lot', component: LotComponent, canActivate: [AuthGuard] },
   { path: 'inventary/lot/inactive', component: InactivelotComponent, canActivate: [AuthGuard] },
   { path: 'inventary/lot/retired', component: RetiredlotComponent, canActivate: [AuthGuard] },
-  { path: 'order', component: OrdermdComponent, canActivate: [AuthGuard] },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'product/inactive', component: InactiveProductComponent, canActivate: [AuthGuard] },

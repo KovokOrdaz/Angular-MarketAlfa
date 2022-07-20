@@ -11,8 +11,7 @@ import { ApiAuthService } from 'src/app/services/apiauth.service';
 
 @Component({
   selector: 'app-inactivelot',
-  templateUrl: './inactivelot.component.html',
-  styleUrls: ['./inactivelot.component.scss']
+  templateUrl: './inactivelot.component.html'
 })
 export class InactivelotComponent implements OnInit {
 

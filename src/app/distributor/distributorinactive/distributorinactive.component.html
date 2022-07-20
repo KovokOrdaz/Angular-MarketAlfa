@@ -76,26 +76,29 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Estructura Legal: {{ sel.ls }}</mat-list-item>
             <mat-list-item>
-              Registro Único de Información Fiscal:
-              {{ sel.rif }}
+              <strong>Nombre: </strong> {{ sel.name }}
             </mat-list-item>
             <mat-list-item>
-              Motivo o Razón:
-              {{ sel.reason }}
+              <strong>Estructura Legal: </strong> {{ sel.ls }}
+            </mat-list-item>
+            <mat-list-item> <strong>RIF:</strong> {{ sel.rif }} </mat-list-item>
+            <mat-list-item>
+              <strong>Motivo o Razón: </strong> {{ sel.reason }}
             </mat-list-item>
             <mat-list-item>
-              Fecha Inhabilitación:
-              {{ sel.date }}
+              <strong>Fecha Inhabilitación: </strong> {{ sel.date | date }}
             </mat-list-item>
             <mat-list-item>
-              Por:
-              {{ sel.user }}
+              <strong>Por: </strong> {{ sel.user }}
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="primary" (click)="delete(sel)">
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
                 <mat-icon>close</mat-icon>Activar
               </button>
             </mat-list-item>
@@ -103,6 +106,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

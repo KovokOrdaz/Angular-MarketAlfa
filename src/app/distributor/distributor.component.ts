@@ -34,7 +34,7 @@ export class DistributorComponent implements OnInit {
   columns: any[] = [
     { prop: 'name', name: 'Nombre' },
     { prop: 'ls', name: 'Estructura Legal' },
-    { prop: 'rif', name: 'Registro Unico Comercial' },
+    { prop: 'rif', name: 'Registro Único Comercial' },
     { prop: 'registeredBy', name: 'Registrado Por' }];
 
   constructor(private api: ApiDistributorService, private router: Router, public apiAuth: ApiAuthService, private excel: ExportExcelService, public dialog: MatDialog, public snackBar: MatSnackBar, public Toastr: ToastrService) {
@@ -47,7 +47,7 @@ export class DistributorComponent implements OnInit {
 
   read() {
     this.api.read().subscribe(x => {
-      this.rows = x.data;
+      this.rows = [...x.data];
       this.temp = this.rows;
     });
   }

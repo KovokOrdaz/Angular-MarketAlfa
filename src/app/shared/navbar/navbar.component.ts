@@ -6,7 +6,7 @@ import { DialogproductorderComponent } from 'src/app/inference/dialogproductorde
 import { User } from 'src/app/models';
 import { OrderX } from 'src/app/models/orderX';
 import { MyBusinnessComponent } from 'src/app/mybusinness/mybusinness.component';
-import { DialogdeliveridComponent } from 'src/app/ordermd/dialogdeliverid/dialogdeliverid.component';
+import { DialogdeliveridComponent } from 'src/app/order/dialogdeliverid/dialogdeliverid.component';
 import { PasswordComponent } from 'src/app/password/password.component';
 import { ApiAuthService } from 'src/app/services/apiauth.service';
 import { ApiDistributorService } from 'src/app/services/apidistributor.service';

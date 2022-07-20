@@ -33,13 +33,17 @@
         [matAutocomplete]="autoLot"
         [(ngModel)]="lot"
         placeholder="Lotes"
+        (ngModelChange)="listLotTempX = filterStatesLot(lot.toString())"
         required
         onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
         (blur)="codeLot()"
       />
       <mat-autocomplete #autoLot="matAutocomplete">
-        <ng-container *ngIf="listLotTemp?.length > 0; else noProduct">
-          <mat-option *ngFor="let element of listLotTemp" [value]="element.lot">
+        <ng-container *ngIf="listLotTempX?.length > 0; else noProduct">
+          <mat-option
+            *ngFor="let element of listLotTempX"
+            [value]="element.lot"
+          >
             {{ element.lot }} - Existencia: {{ element.amount - element.sold }}
             {{ element.measure }}
           </mat-option>

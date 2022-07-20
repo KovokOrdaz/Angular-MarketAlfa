@@ -16,8 +16,7 @@ import { DialoginactiveuserComponent } from './dialoginactiveuser/dialoginactive
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit {
 
@@ -46,13 +45,13 @@ export class UserComponent implements OnInit {
     this.api.readSuper().subscribe(x => {
       if (x.data == this.user.id) {
         this.api.readFull().subscribe(x => {
-          this.rows = x.data;
+          this.rows = [...x.data];
           this.temp = this.rows;
         });
       }
       else {
         this.api.read().subscribe(x => {
-          this.rows = x.data;
+          this.rows = [...x.data];
           this.temp = this.rows;
         });
       }

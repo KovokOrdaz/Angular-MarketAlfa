@@ -44,19 +44,16 @@ import { DialogUserComponent } from './user/dialoguser/dialoguser.component';
 import { RegisterBusinessComponent } from './login/registerbusiness/registerbusiness.component';
 import { RegisteruserComponent } from './login/registeruser/registeruser.component';
 import { InactiveuserComponent } from './user/inactiveuser/inactiveuser.component';
-import { AddorderComponent } from './order/addorder/addorder.component';
-import { OrdermdComponent } from './ordermd/ordermd.component';
-import { DialogordermdComponent } from './ordermd/dialogordermd/dialogordermd.component';
-import { DialogorderdetailComponent } from './ordermd/dialogorderdetail/dialogorderdetail.component';
+import { DialogorderComponent } from './order/dialogorder/dialogorder.component';
+import { DialogorderdetailComponent } from './order/dialogorderdetail/dialogorderdetail.component';
 import { DialogrecoveryComponent } from './login/recovery/dialogrecovery/dialogrecovery.component';
 import { RequestComponent } from './request/request.component';
 import { PasswordComponent } from './password/password.component';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 import { StringsOnlyDirective } from './directives/strings-only.directive';
 import { AnswerComponent } from './answer/answer.component';
-import { DialogorderComponent } from './order/dialogorder/dialogorder.component';
-import { DialogshowComponent } from './ordermd/dialogshow/dialogshow.component';
-import { DialogdeliveridComponent } from './ordermd/dialogdeliverid/dialogdeliverid.component';
+import { DialogshowComponent } from './order/dialogshow/dialogshow.component';
+import { DialogdeliveridComponent } from './order/dialogdeliverid/dialogdeliverid.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { DialogentryComponent } from './inventory/dialogentry/dialogentry.component';
 import { EntryComponent } from './inventory/entry/entry.component';
@@ -128,9 +125,8 @@ import { DialogretreatComponent } from './inventory/dialogretreat/dialogretreat.
     RegisterBusinessComponent,
     RegisteruserComponent,
     InactiveuserComponent,
-    AddorderComponent,
-    OrdermdComponent,
-    DialogordermdComponent,
+    OrderComponent,
+    DialogorderComponent,
     DialogorderdetailComponent,
     RequestComponent,
     DialogrecoveryComponent,

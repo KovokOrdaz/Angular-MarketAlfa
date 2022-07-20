@@ -12,8 +12,7 @@ import { DialoginactivelotComponent } from './dialoginactivelot/dialoginactivelo
 
 @Component({
   selector: 'app-lot',
-  templateUrl: './lot.component.html',
-  styleUrls: ['./lot.component.scss']
+  templateUrl: './lot.component.html'
 })
 export class LotComponent implements OnInit {
   title: string = "Lotes";

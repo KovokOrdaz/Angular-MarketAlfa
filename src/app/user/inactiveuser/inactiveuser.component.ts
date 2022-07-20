@@ -12,8 +12,7 @@ import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-inactiveuser',
-  templateUrl: './inactiveuser.component.html',
-  styleUrls: ['./inactiveuser.component.scss']
+  templateUrl: './inactiveuser.component.html'
 })
 export class InactiveuserComponent implements OnInit {
   title: string = "Usuario Inactivos";

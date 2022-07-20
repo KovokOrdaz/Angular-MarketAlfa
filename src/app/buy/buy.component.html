@@ -82,12 +82,19 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Factura: {{ sel.id }}</mat-list-item>
-            <mat-list-item>Cliente: {{ sel.client }}</mat-list-item>
-            <mat-list-item>Fecha: {{ sel.date }}</mat-list-item>
+            <mat-list-item>
+              <strong>Factura: </strong> {{ sel.id }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cliente: </strong> {{ sel.client }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha: </strong> {{ sel.date | date }}
+            </mat-list-item>
             <mat-list-item>
               <button
                 mat-raised-button
+                class="buttonSC"
                 color="basic"
                 (click)="show(sel.id, sel.client, sel.date)"
               >
@@ -99,6 +106,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

@@ -23,7 +23,7 @@
         [headerHeight]="50"
         [footerHeight]="50"
         rowHeight="auto"
-        [limit]="10"
+        [limit]="5"
         [selected]="selected"
         [selectionType]="SelectionType.single"
         (activate)="onActivate($event)"
@@ -109,25 +109,45 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Codigo: {{ sel.code }}</mat-list-item>
-            <mat-list-item>Categoria: {{ sel.category }}</mat-list-item>
-            <mat-list-item>Medida: {{ sel.description }}</mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+              <strong>Nombre: </strong> {{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Código: </strong> {{ sel.code }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Categoría: </strong> {{ sel.category }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Medida: </strong> {{ sel.description }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                class="buttonSC"
+                mat-raised-button
+                color="primary"
+                (click)="openEdit(sel)"
+              >
                 <mat-icon>edit</mat-icon>
-                Edtiar
+                Editar
               </button>
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="warn" (click)="delete(sel)">
-                <mat-icon>close</mat-icon>Inactivar
+              <button
+                mat-raised-button
+                color="warn"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
+                <mat-icon>close</mat-icon>
+                Inactivar
               </button>
             </mat-list-item>
             <mat-list-item>
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

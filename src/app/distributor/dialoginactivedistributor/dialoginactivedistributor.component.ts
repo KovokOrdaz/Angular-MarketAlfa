@@ -10,8 +10,7 @@ import { ApiDistributorService } from 'src/app/services/apidistributor.service';
 
 @Component({
   selector: 'app-dialoginactivedistributor',
-  templateUrl: './dialoginactivedistributor.component.html',
-  styleUrls: ['./dialoginactivedistributor.component.scss']
+  templateUrl: './dialoginactivedistributor.component.html'
 })
 export class DialoginactivedistributorComponent implements OnInit {
   userX !: User;

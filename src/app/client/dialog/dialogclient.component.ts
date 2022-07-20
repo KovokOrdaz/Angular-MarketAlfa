@@ -32,9 +32,7 @@ export class DialogClientComponent {
       if (entity.phone == "S/N") {
         this.disableNumber = true;
       }
-      else {
-        this.phone = entity.phone;
-      }
+      this.phone = entity.phone;
       this.direction = entity.direction;
       this.dni = entity.dni;
       this.status = entity.status;

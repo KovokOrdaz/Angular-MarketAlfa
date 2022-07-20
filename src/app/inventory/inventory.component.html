@@ -36,7 +36,7 @@
       <mat-card class="example-card">
         <mat-card-subtitle>{{ title }}</mat-card-subtitle>
         <mat-card-title>
-          {{ !selected.length ? "Opciones" : "Selecionado:" }}
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
         </mat-card-title>
 
         <mat-divider inset></mat-divider>
@@ -135,17 +135,30 @@
             </ng-container>
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Codigo: {{ sel.code }}</mat-list-item>
-            <mat-list-item>Categoria: {{ sel.category }}</mat-list-item>
-            <mat-list-item>Cantidad: {{ sel.amount }}</mat-list-item>
-            <mat-list-item>Cantida de Alerta: {{ sel.low }}</mat-list-item>
-            <mat-list-item>Cantida de Reserva: {{ sel.lock }}</mat-list-item>
+            <mat-list-item>
+              <strong>Nombre: </strong> &nbsp; &nbsp; {{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Código: </strong> &nbsp; &nbsp;{{ sel.code }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Categoría: </strong> &nbsp; &nbsp;{{ sel.category }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cantidad: </strong> &nbsp; &nbsp;{{ sel.amount }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cantidad de Alerta: </strong> &nbsp; &nbsp;{{ sel.low }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cantidad de Reserva: </strong> &nbsp; &nbsp;{{ sel.lock }}
+            </mat-list-item>
             <ng-container *ngIf="user.privilege">
               <mat-list-item>
                 <button
                   mat-raised-button
                   color="basic"
+                  class="buttonSC"
                   (click)="alertChange(sel.id)"
                 >
                   <mat-icon>edit</mat-icon>
@@ -156,6 +169,7 @@
                 <button
                   mat-raised-button
                   color="basic"
+                  class="buttonSC"
                   (click)="priceChange(sel.id)"
                 >
                   <mat-icon>edit</mat-icon>
@@ -165,6 +179,7 @@
               <mat-list-item>
                 <button
                   mat-raised-button
+                  class="buttonSC"
                   color="basic"
                   (click)="clearSelection()"
                 >

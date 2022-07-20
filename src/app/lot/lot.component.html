@@ -36,7 +36,7 @@
       <mat-card class="example-card">
         <mat-card-subtitle>{{ title }}</mat-card-subtitle>
         <mat-card-title>
-          {{ !selected.length ? "Opciones" : "Selecionado:" }}
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
         </mat-card-title>
 
         <mat-divider inset></mat-divider>
@@ -96,19 +96,38 @@
             </ng-container>
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Código: {{ sel.code }}</mat-list-item>
-            <mat-list-item>Categoría: {{ sel.category }}</mat-list-item>
-            <mat-list-item>Lote: {{ sel.lot }}</mat-list-item>
-            <mat-list-item>Fecha de Entrada: {{ sel.date }}</mat-list-item>
-            <mat-list-item>Cantidad: {{ sel.amount }}</mat-list-item>
-            <mat-list-item>Ingresado Por: {{ sel.registeredBy }}</mat-list-item>
             <mat-list-item>
-              Fecha de Expiración: {{ sel.expiration }}
+              <strong>Nombre: </strong> {{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Código: </strong> {{ sel.code }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Categoría: </strong> {{ sel.category }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Lote: </strong> {{ sel.lot }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Entrada: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cantidad: </strong> {{ sel.amount }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Ingresado Por: </strong> {{ sel.registeredBy }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Expiración: </strong> {{ sel.expiration | date }}
             </mat-list-item>
             <ng-container *ngIf="user.privilege">
               <mat-list-item>
-                <button mat-raised-button color="warn" (click)="delete(sel)">
+                <button
+                  mat-raised-button
+                  color="warn"
+                  class="buttonSC"
+                  (click)="delete(sel)"
+                >
                   <mat-icon>close</mat-icon>Retirar
                 </button>
               </mat-list-item>
@@ -116,6 +135,7 @@
                 <button
                   mat-raised-button
                   color="basic"
+                  class="buttonSC"
                   (click)="clearSelection()"
                 >
                   <mat-icon> clear_all</mat-icon>

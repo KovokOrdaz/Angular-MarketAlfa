@@ -87,26 +87,42 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Estructura Legal: {{ sel.ls }}</mat-list-item>
             <mat-list-item>
-              Registro Único de Información Fiscal: {{ sel.rif }}</mat-list-item
-            >
+              <strong>Nombre: </strong> {{ sel.name }}
+            </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+              <strong>Estructura Legal: </strong> {{ sel.ls }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>RIF: </strong> {{ sel.rif }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openEdit(sel)"
+              >
                 <mat-icon>edit</mat-icon>
                 Edtiar
               </button>
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="warn" (click)="delete(sel)">
-                <mat-icon>close</mat-icon> Inactivar
+              <button
+                mat-raised-button
+                color="warn"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
+                <mat-icon>close</mat-icon>
+                Inactivar
               </button>
             </mat-list-item>
             <mat-list-item>
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

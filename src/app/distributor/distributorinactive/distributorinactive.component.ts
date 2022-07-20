@@ -12,8 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-distributorinactive',
-  templateUrl: './distributorinactive.component.html',
-  styleUrls: ['./distributorinactive.component.scss']
+  templateUrl: './distributorinactive.component.html'
 })
 export class DistributorInactiveComponent implements OnInit {
 

@@ -14,8 +14,7 @@ import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-buy',
-  templateUrl: './buy.component.html',
-  styleUrls: ['./buy.component.scss']
+  templateUrl: './buy.component.html'
 })
 export class BuyComponent implements OnInit {
 

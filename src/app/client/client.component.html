@@ -36,7 +36,7 @@
       <mat-card class="example-card">
         <mat-card-subtitle>{{ title }}</mat-card-subtitle>
         <mat-card-title>
-          {{ !selected.length ? "Opciones" : "Selecionado:" }}
+          {{ !selected.length ? "Opciones" : "Seleccionado:" }}
         </mat-card-title>
 
         <mat-divider inset></mat-divider>
@@ -87,17 +87,34 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
             <mat-list-item>
-              Nacionalidad: {{ sel.nationalityName }}
+              <strong>Nombre: </strong> {{ sel.name }}
             </mat-list-item>
-            <mat-list-item>Cédula o Pasaporte: {{ sel.dni }}</mat-list-item>
-            <mat-list-item>Teléfono: {{ sel.phone }}</mat-list-item>
-            <mat-list-item>Dirección: {{ sel.direction }}</mat-list-item>
-            <mat-list-item>Fecha de Registro: {{ sel.date }}</mat-list-item>
-            <mat-list-item>Por: {{ sel.user }}</mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+              <strong>Nacionalidad: </strong> {{ sel.nationalityName }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cédula o Pasaporte: </strong> {{ sel.dni }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Teléfono: </strong> {{ sel.phone }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Dirección: </strong> {{ sel.direction }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Registro: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Por: </strong> {{ sel.user }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openEdit(sel)"
+              >
                 <mat-icon>edit</mat-icon>
                 Editar
               </button>
@@ -111,6 +128,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

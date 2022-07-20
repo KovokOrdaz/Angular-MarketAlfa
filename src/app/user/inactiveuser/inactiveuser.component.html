@@ -65,14 +65,25 @@
             </mat-list-item>
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>PSeudonimo: {{ sel.banned }}</mat-list-item>
-            <mat-list-item>Motivo o Razón: {{ sel.reason }}</mat-list-item>
-            <mat-list-item>Inhabilitada Por: {{ sel.user }}</mat-list-item>
-            <mat-list-item
-              >Fecha de Inhabilitación: {{ sel.date }}</mat-list-item
-            >
             <mat-list-item>
-              <button mat-raised-button color="primary" (click)="delete(sel)">
+              <strong>PSeudonimo: </strong> {{ sel.banned }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Motivo o Razón: </strong> {{ sel.reason }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Inhabilitada Por: </strong> {{ sel.user }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Inhabilitación: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC"
+                color="primary"
+                (click)="delete(sel)"
+              >
                 <mat-icon>check</mat-icon>Activar
               </button>
             </mat-list-item>
@@ -80,6 +91,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

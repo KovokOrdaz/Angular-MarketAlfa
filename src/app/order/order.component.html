@@ -28,6 +28,7 @@
         [selectionType]="SelectionType.single"
         (activate)="onActivate($event)"
         (select)="onSelect($event)"
+        id="tablePDF"
       >
       </ngx-datatable>
     </div>
@@ -56,21 +57,31 @@
               <button
                 mat-raised-button
                 class="buttonSC"
-                [routerLink]="['/order/inactive']"
-                color="warn"
+                [routerLink]="['/request']"
+                color="basic"
               >
                 <mat-icon matPrefix>filter_list</mat-icon>
                 Recibidos
               </button>
             </mat-list-item>
             <!-- <mat-list-item>
-                  <button mat-raised-button class="buttonSC" color="basic">
-                    <mat-icon> pie_chart</mat-icon>
-                    Grafica
-                  </button>
-                </mat-list-item> -->
+                <button mat-raised-button class="buttonSC" color="basic">
+                  <mat-icon> pie_chart</mat-icon>
+                  Grafica
+                </button>
+              </mat-list-item> -->
             <mat-divider></mat-divider>
             <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC PDF"
+                (click)="createPDF()"
+              >
+                <mat-icon matPrefix>picture_as_pdf</mat-icon>
+                PDF
+              </button>
+            </mat-list-item>
+            <!-- <mat-list-item>
               <button
                 mat-raised-button
                 class="buttonSC EXCEL"
@@ -79,17 +90,63 @@
                 <mat-icon>vertical_split</mat-icon>
                 EXCEL
               </button>
-            </mat-list-item>
+            </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Pedido: {{ sel.id }}</mat-list-item>
-            <mat-list-item>Distribuidor: {{ sel.distributor }}</mat-list-item>
-            <mat-list-item>Fecha de Emision: {{ sel.date }}</mat-list-item>
-            <mat-list-item> Fecha de Lleagada: {{ sel.recieve }}</mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic">Recibir</button>
-              <button mat-raised-button color="warn" (click)="delete(sel)">
-                Eliminar
+              <strong>Pedido: </strong> {{ sel.id }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Distribuidor:</strong> {{ sel.distributor }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Emisión: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Llegada: </strong> {{ sel.receive | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                class="buttonSC"
+                color="primary"
+                (click)="openDeliverid(sel)"
+              >
+                <mat-icon> local_shipping</mat-icon>
+                Recibir
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                class="buttonSC"
+                (click)="show(sel.id, sel.distributor, sel.receive)"
+              >
+                <mat-icon> list</mat-icon>
+                Ver
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="warn"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
+                <mat-icon> close</mat-icon>
+                Desactivar
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="basic"
+                class="buttonSC"
+                (click)="clearSelection()"
+              >
+                <mat-icon> clear_all</mat-icon>
+                Deseleccionar
               </button>
             </mat-list-item>
           </mat-list>

@@ -11,8 +11,7 @@ import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-retiredlot',
-  templateUrl: './retiredlot.component.html',
-  styleUrls: ['./retiredlot.component.scss']
+  templateUrl: './retiredlot.component.html'
 })
 export class RetiredlotComponent implements OnInit {
   title: string = "Lotes Retirados";
@@ -40,7 +39,6 @@ export class RetiredlotComponent implements OnInit {
       { prop: 'code', name: 'Código' },
       { prop: 'category', name: 'Categoría' },
       { prop: 'lot', name: 'Lote' },
-      { prop: 'date', name: 'Entrada' },
       { prop: 'amount', name: 'Cantidad' },
       { prop: 'sold', name: 'Vendido' },
       { prop: 'date', name: 'Retirada' },

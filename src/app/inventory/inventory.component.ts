@@ -15,8 +15,7 @@ import { DialogretreatComponent } from './dialogretreat/dialogretreat.component'
 
 @Component({
   selector: 'app-inventory',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  templateUrl: './inventory.component.html'
 })
 export class InventoryComponent implements OnInit {
   title: string = "Inventario";
@@ -47,16 +46,16 @@ export class InventoryComponent implements OnInit {
         });
         this.columns = [
           { prop: 'name', name: 'Nombre' },
-          { prop: 'code', name: 'Codigo' },
-          { prop: 'category', name: 'Categoria' },
-          { prop: 'amount', name: 'Cantida' },
+          { prop: 'code', name: 'Código' },
+          { prop: 'category', name: 'Categoría' },
+          { prop: 'amount', name: 'Cantidad' },
           { prop: 'price', name: 'Precio' },
           { prop: 'low', name: 'Alerta' },
           { prop: 'lock', name: 'Reserva' }];
       }
       else {
         this.api.read().subscribe(x => {
-          this.rows = x.data;
+          this.rows = [...x.data];
           this.temp = this.rows;
         });
         this.columns = [

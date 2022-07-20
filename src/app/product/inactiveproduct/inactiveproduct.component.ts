@@ -11,8 +11,7 @@ import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-inactiveproduct',
-  templateUrl: './inactiveproduct.component.html',
-  styleUrls: ['./inactiveproduct.component.scss']
+  templateUrl: './inactiveproduct.component.html'
 })
 export class InactiveProductComponent implements OnInit {
 

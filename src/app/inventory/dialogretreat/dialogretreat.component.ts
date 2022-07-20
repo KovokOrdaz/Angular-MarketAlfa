@@ -33,6 +33,7 @@ export class DialogretreatComponent implements OnInit {
   public listCode: string[] = [];
   public listLot: any[] = [];
   public listLotTemp: any[] = [];
+  public listLotTempX: any[] = [];
 
   public business: Business;
   public coin: string = "";
@@ -59,6 +60,15 @@ export class DialogretreatComponent implements OnInit {
     }
 
     return this.listProduct;
+  }
+
+  filterStatesLot(val: string) {
+    if (val) {
+      const filterValue = val.toLowerCase();
+      return this.listLotTempX.filter(option => option.lot.toString().toLowerCase().includes(filterValue));
+      //return this.listDist.filter(state => state.name .toLowerCase().startsWith(filterValue));
+    }
+    return this.listLotTempX;
   }
 
   amountValidation(): void {
@@ -93,6 +103,7 @@ export class DialogretreatComponent implements OnInit {
         this.measureDec = productName.description;
         this.nameProduct = productName.name;
         this.listLotTemp = this.listLot.filter(option => option.code.toLowerCase() == this.product);
+        this.listLotTempX = this.listLot.filter(option => option.code.toLowerCase() == this.product);
       });
     }
     else {
@@ -106,6 +117,7 @@ export class DialogretreatComponent implements OnInit {
     }
   }
   public codeLot(): void {
+    this.listLotTempX = this.listLotTemp;
     console.log(this.lot)
     if (this.listLot.find(item => item.lot == this.lot && item.code == this.product)) {
       var lot = this.listLot.find(item => item.lot == this.lot && item.code == this.product);

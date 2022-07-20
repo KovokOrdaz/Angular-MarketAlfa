@@ -10,8 +10,7 @@ import { ApiUserService } from 'src/app/services/apiuser.service';
 
 @Component({
   selector: 'app-dialoginactiveuser',
-  templateUrl: './dialoginactiveuser.component.html',
-  styleUrls: ['./dialoginactiveuser.component.scss']
+  templateUrl: './dialoginactiveuser.component.html'
 })
 export class DialoginactiveuserComponent implements OnInit {
   userX !: User;

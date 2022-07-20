@@ -75,16 +75,29 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Código: {{ sel.code }}</mat-list-item>
-            <mat-list-item>Motivo O Razón: {{ sel.reason }}</mat-list-item>
             <mat-list-item>
-              Fecha de Inhabilitación: {{ sel.date }}</mat-list-item
-            >
-            <mat-list-item>Por: {{ sel.user }}</mat-list-item>
+              <strong>Nombre: </strong> {{ sel.name }}
+            </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="primary" (click)="delete(sel)">
-                <mat-icon>check_circle_outline</mat-icon>
+              <strong>Código: </strong> {{ sel.code }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Motivo O Razón: </strong> {{ sel.reason }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha de Inhabilitación: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Por: </strong> {{ sel.user }}
+            </mat-list-item>
+            <mat-list-item>
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="delete(sel)"
+              >
+                <mat-icon>close</mat-icon>
                 Activar
               </button>
             </mat-list-item>
@@ -92,6 +105,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

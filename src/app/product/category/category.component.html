@@ -91,22 +91,34 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Nombre: {{ sel.name }}</mat-list-item>
-            <mat-list-item
-              >Estado:
+            <mat-list-item>
+              <strong>Nombre: </strong> {{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Estado: </strong>
               <mat-icon color="primary">
                 {{ sel.status ? "check_circle_outline" : "close" }}
               </mat-icon>
               {{ sel.status ? "Activo" : "Inactivo" }}
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button color="basic" (click)="openEdit(sel)">
+              <button
+                mat-raised-button
+                color="primary"
+                class="buttonSC"
+                (click)="openEdit(sel)"
+              >
                 <mat-icon>edit</mat-icon>
                 Edtiar
               </button>
             </mat-list-item>
             <mat-list-item>
-              <button mat-raised-button (click)="delete(sel)">
+              <button
+                mat-raised-button
+                class="buttonSC"
+                [color]="sel.status ? 'warn' : 'primary'"
+                (click)="delete(sel)"
+              >
                 <mat-icon>{{ sel.status ? "close" : "check" }}</mat-icon>
                 {{ sel.status ? "Desactivar" : "Activar" }}
               </button>
@@ -115,6 +127,7 @@
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>

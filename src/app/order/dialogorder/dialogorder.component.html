@@ -1,28 +1,26 @@
-<div class="dialog">
-  <h1 mat-dialog-title>Registre Pedido</h1>
+<!-- <div class="dialog">
+  <h1 mat-dialog-title>
+    {{ entity != null ? "Modificar " : "Registrar " }}
+  </h1>
   <div mat-dialog-content>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Proveedor</mat-label>
-      <input
-        type="text"
+    <mat-form-field appearance="fill">
+      <mat-label>Distribuidor</mat-label>
+      <mat-select
+        title="distributor"
         matInput
-        [matAutocomplete]="auto"
-        [(ngModel)]="order.distributor"
-        placeholder="Proveedor"
+        [(ngModel)]="distributor"
         required
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let element of listDist" [value]="element.rif">
+      >
+        <mat-option *ngFor="let element of listDist" [value]="element.id">
           {{ element.name }}
         </mat-option>
-      </mat-autocomplete>
+      </mat-select>
     </mat-form-field>
-
     <mat-form-field appearance="fill">
       <mat-label>Fecha de Entrega (Aproximado)</mat-label>
       <input
         title="receive"
-        [(ngModel)]="order.receive"
+        [(ngModel)]="receive"
         matInput
         [matDatepicker]="picker"
       />
@@ -30,48 +28,171 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="close()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="entity != null ? update() : create()"
+    >
+      <mat-icon>edit</mat-icon>
+      {{ entity != null ? "Modificar" : "Registrar" }}
+    </button>
+  </div>
+</div> -->
+
+<div class="dialog">
+  <h1 mat-dialog-title>Registre Pedido</h1>
+  <div mat-dialog-content>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Proveedor</mat-label>
+            <span matSuffix style="font-size: 20px">
+              {{ nameDistribuidor }}
+            </span>
+            <input
+              type="text"
+              matInput
+              [matAutocomplete]="auto"
+              [(ngModel)]="order.distributor"
+              placeholder="Proveedor"
+              (ngModelChange)="listDist = filterStates(order.distributor)"
+              (blur)="distributorValidation()"
+              required
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let element of listDist"
+                [value]="element.rif"
+              >
+                {{ element.rif }} - {{ element.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Fecha de Entrega (Aproximado)</mat-label>
+            <input
+              title="receive"
+              [(ngModel)]="order.receive"
+              matInput
+              [matDatepicker]="picker"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <mat-divider></mat-divider>
+      </tr>
+    </table>
 
     <form [formGroup]="formConcept" (ngSubmit)="addContent()">
-      <mat-form-field>
-        <mat-label>Producto</mat-label>
-        <input
-          type="text"
-          formControlName="product"
-          matInput
-          placeholder="producto"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cantidad</mat-label>
-        <input
-          type="text"
-          formControlName="amount"
-          matInput
-          placeholder="cantidad"
-        />
-      </mat-form-field>
-      <div style="width: 100%">
-        <button
-          type="submit"
-          style="width: 100%; display: block"
-          [disabled]="!formConcept.valid"
-          mat-raised-button
-        >
-          +
-        </button>
-      </div>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <span matSuffix style="font-size: 20px">
+                {{ nameProduct }}
+              </span>
+              <mat-label>Producto</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="product"
+                placeholder="Producto"
+                [matAutocomplete]="Product"
+                (blur)="codeMeasure()"
+              />
+              <mat-autocomplete #Product="matAutocomplete">
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option.code"
+                >
+                  {{ option.code }} - {{ option.name }} -
+                  {{ option.description }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Cantidad</mat-label>
+              <input
+                type="number"
+                formControlName="amount"
+                matInput
+                placeholder="Cantidad"
+                min="0"
+                onkeypress="return (event.charCode >= 46 && event.charCode <= 57)"
+              />
+              <span matSuffix>
+                <strong>{{ this.measureDec }}</strong>
+              </span>
+            </mat-form-field>
+          </td>
+          <td>
+            <button
+              type="submit"
+              [disabled]="!formConcept.valid"
+              mat-raised-button
+              style="width: 100%; margin-bottom: 20px"
+            >
+              +
+            </button>
+          </td>
+        </tr>
+      </table>
     </form>
     <div>
-      <h5>Detalles</h5>
-      <table style="width: 100%">
+      <table
+        style="
+          width: 100%;
+          font-size: 16px;
+          text-align: center;
+          min-height: 200px;
+        "
+      >
         <tr>
+          <th>Código</th>
           <th>Producto</th>
           <th>Cantidad</th>
         </tr>
-        <tr *ngFor="let item of concept">
-          <td>{{ item.product }}</td>
-          <td>{{ item.amount }}</td>
-        </tr>
+        <ng-container *ngIf="concept.length > 0; else noProduct">
+          <tr *ngFor="let item of concept">
+            <td>{{ item.product }}</td>
+            <td>
+              {{ getName(item.product) }}
+            </td>
+            <td>{{ item.amount }} {{ getMeasure(item.product) }}</td>
+            <td>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteConcept(item.product)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noProduct>
+          <tr>
+            <td colspan="5" style="margin: 20px">
+              No Hay Productos Registrado en la Orden
+            </td>
+          </tr>
+        </ng-template>
       </table>
     </div>
   </div>

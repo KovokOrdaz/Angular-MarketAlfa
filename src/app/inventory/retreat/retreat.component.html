@@ -76,18 +76,35 @@
             </mat-list-item> -->
           </mat-list>
           <mat-list *ngFor="let sel of selected">
-            <mat-list-item>Producto: {{ sel.name }}</mat-list-item>
-            <mat-list-item>Categoría: {{ sel.category }}</mat-list-item>
-            <mat-list-item>Código: {{ sel.code }}</mat-list-item>
-            <mat-list-item>Cantidad: {{ sel.amount }}</mat-list-item>
-            <mat-list-item>Lote: {{ sel.lot }}</mat-list-item>
-            <mat-list-item>Fecha: {{ sel.date }}</mat-list-item>
-            <mat-list-item>Razón o Motivo: {{ sel.reason }}</mat-list-item>
-            <mat-list-item>Por: {{ sel.user }}</mat-list-item>
+            <mat-list-item>
+              <strong>Producto: </strong> {{ sel.name }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Categoría: </strong> {{ sel.category }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Código: </strong> {{ sel.code }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Cantidad: </strong> {{ sel.amount }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Lote: </strong> {{ sel.lot }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Fecha: </strong> {{ sel.date | date }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Razón o Motivo: </strong> {{ sel.reason }}
+            </mat-list-item>
+            <mat-list-item>
+              <strong>Por: </strong> {{ sel.user }}
+            </mat-list-item>
             <mat-list-item>
               <button
                 mat-raised-button
                 color="basic"
+                class="buttonSC"
                 (click)="clearSelection()"
               >
                 <mat-icon> clear_all</mat-icon>
