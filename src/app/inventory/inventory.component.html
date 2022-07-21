@@ -23,7 +23,7 @@
         [headerHeight]="50"
         [footerHeight]="50"
         rowHeight="auto"
-        [limit]="10"
+        [limit]="5"
         [selected]="selected"
         [selectionType]="SelectionType.single"
         (activate)="onActivate($event)"
@@ -60,7 +60,7 @@
                 <button
                   *ngIf="user.privilege"
                   mat-raised-button
-                  color="basic"
+                  color="primary"
                   class="buttonSC"
                   (click)="entry()"
                 >
@@ -72,7 +72,7 @@
                 <button
                   *ngIf="user.privilege"
                   mat-raised-button
-                  color="basic"
+                  color="warn"
                   class="buttonSC"
                   (click)="retreat()"
                 >

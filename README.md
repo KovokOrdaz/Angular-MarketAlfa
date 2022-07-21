@@ -1,3 +1,12 @@
+# Requisitos
+
+1. Tener Node.js instalado
+
+#Tutorial
+
+1. Se procede ha abrir una terminal desde la carpeta o se abre una terminal de forma general y se procede a pasar la ruta de la carpeta a la misma.
+2. Ya en la terminal con la ruta de la carpeta, se ejecuta el comando "ng serve", esto levantara la app en la ruta web "http://localhost:4200/".
+
 # MarketAlfa
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.

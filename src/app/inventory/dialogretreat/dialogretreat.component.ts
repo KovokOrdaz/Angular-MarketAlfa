@@ -139,9 +139,10 @@ export class DialogretreatComponent implements OnInit {
       var productName = this.listProduct.find(item => item.code == this.product);
       if (this.listLot.find(item => item.lot == this.lot && item.code == this.product)) {
         var lot = this.listLot.find(item => item.lot == this.lot && item.code == this.product);
+        console.log(lot);
         if (this.amount > 0) {
           if (this.reason.length > 9) {
-            if (lot.amount > this.amount) {
+            if ((lot.amount - lot.sold) > this.amount) {
               console.log(productName);
               if (productName.isComplete) {
                 if (Number.isInteger(this.amount)) {
