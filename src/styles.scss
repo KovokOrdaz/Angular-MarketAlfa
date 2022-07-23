@@ -9,6 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .container
 {
+  z-index: 1;
     min-height: 85vh;
     max-height: 100vh;
     width: 100%;
@@ -69,7 +70,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100%;
     position: fixed;
     background-color: #17171717;
-    z-index: 1000;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,9 +78,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .dialog
 {
-    min-width: 460px;
-    max-width: 90%;
-    margin: 20px auto;
+  z-index: 5;
+  min-width: 460px;
+  max-width: 90%;
+  margin: 20px auto;
     padding: 6px;
 }
 

@@ -177,7 +177,7 @@ export class DialogretreatComponent implements OnInit {
               }
             }
             else {
-              this.Toastr.warning("La Cantidad No Puede Ser Mayor a la Existencia del Lote", "MarketAlfaApp");
+              this.Toastr.warning("La Cantidad No Puede Ser Mayor o Igual a la Existencia del Lote", "MarketAlfaApp");
             }
           }
           else {
